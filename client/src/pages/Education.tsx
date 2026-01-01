@@ -156,6 +156,7 @@ export default function Education() {
   // Light theme input styles
   const inputStyles = "bg-white border-[#1a1a1a]/10 focus:border-[#c06c58] h-12 text-base font-light rounded-none text-[#1a1a1a] placeholder:text-[#1a1a1a]/40";
   const labelStyles = "font-mono text-xs uppercase tracking-widest text-[#1a1a1a]/60";
+  const gridLabelStyles = "font-mono text-xs uppercase tracking-widest text-[#1a1a1a]/60 min-h-[2.5rem] flex items-end pb-1";
 
   return (
     <div className="min-h-screen w-full bg-[#fdfbf7] text-[#1a1a1a] pt-24 pb-12 px-6 md:px-12">
@@ -263,8 +264,8 @@ export default function Education() {
 
                 {/* Student Name */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className={labelStyles}>Student First Name *</label>
+                  <div>
+                    <label className={gridLabelStyles}>Student First Name *</label>
                     <Input 
                       value={studentFirstName}
                       onChange={(e) => setStudentFirstName(e.target.value)}
@@ -273,8 +274,8 @@ export default function Education() {
                       placeholder="First name"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className={labelStyles}>Last Name</label>
+                  <div>
+                    <label className={gridLabelStyles}>Last Name</label>
                     <Input 
                       value={studentLastName}
                       onChange={(e) => setStudentLastName(e.target.value)}
@@ -375,8 +376,8 @@ export default function Education() {
 
                 {/* Parent Name */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className={labelStyles}>Parent First Name *</label>
+                  <div>
+                    <label className={gridLabelStyles}>Parent First Name *</label>
                     <Input 
                       value={parentFirstName}
                       onChange={(e) => setParentFirstName(e.target.value)}
@@ -385,8 +386,8 @@ export default function Education() {
                       placeholder="First name"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className={labelStyles}>Last Name *</label>
+                  <div>
+                    <label className={gridLabelStyles}>Last Name *</label>
                     <Input 
                       value={parentLastName}
                       onChange={(e) => setParentLastName(e.target.value)}
