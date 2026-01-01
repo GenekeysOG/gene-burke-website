@@ -1,204 +1,183 @@
 import { motion } from "framer-motion";
-import { Mail, Instagram, Linkedin, Youtube, MapPin } from "lucide-react";
-import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-
-const socialLinks = [
-  { 
-    href: "https://www.instagram.com/genejburke", 
-    icon: Instagram, 
-    label: "Instagram",
-    handle: "@genejburke"
-  },
-  { 
-    href: "https://www.linkedin.com/in/genekeysburke/", 
-    icon: Linkedin, 
-    label: "LinkedIn",
-    handle: "genekeysburke"
-  },
-  { 
-    href: "https://www.youtube.com/@genejburke", 
-    icon: Youtube, 
-    label: "YouTube",
-    handle: "@genejburke"
-  },
-];
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ArrowRight, CheckCircle, Mail } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Contact() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !contactEmail.trim() || !message.trim()) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Contact from ${name.trim()}`);
+    const body = encodeURIComponent(`Name: ${name.trim()}\nEmail: ${contactEmail.trim()}\n\nMessage:\n${message.trim()}`);
+    window.location.href = `mailto:contact@geneburke.com?subject=${subject}&body=${body}`;
+    
+    setShowSuccessModal(true);
+    setName("");
+    setContactEmail("");
+    setMessage("");
+  };
+
   return (
-    <div className="min-h-screen w-full bg-background text-foreground pt-24 pb-24">
-      <div className="container mx-auto px-6 md:px-12">
-        {/* Header */}
+    <div className="min-h-screen w-full bg-background text-foreground pt-24 pb-24 px-6 md:px-12">
+      <div className="container mx-auto max-w-4xl">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 md:mb-24"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="space-y-16"
         >
-          <span className="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-4 block">
-            Get in Touch
-          </span>
-          <h1 className="font-serif text-5xl md:text-7xl font-light tracking-tight text-foreground">
-            Let's <span className="text-accent italic">Connect</span>
-          </h1>
-        </motion.div>
+          {/* Header */}
+          <div className="space-y-6">
+            <h1 className="font-serif text-5xl md:text-7xl font-light tracking-tight text-white">
+              Get in <span className="text-accent italic">Touch</span>
+            </h1>
+            <p className="font-sans text-xl font-light text-muted-foreground max-w-2xl">
+              For collaborations, music education inquiries, or ongoing connection.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-12"
-          >
-            <div>
-              <p className="font-sans text-xl text-foreground/90 leading-relaxed mb-8">
-                For bookings, collaborations, music education inquiries, or just to say hello—I'd love to hear from you.
-              </p>
-            </div>
+          {/* Contact Form */}
+          <div className="space-y-8">
+            <form className="space-y-6" onSubmit={handleContactSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Name</label>
+                  <Input 
+                    id="name" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="bg-transparent border-white/10 focus:border-accent h-12 text-lg font-light rounded-none"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="contactEmail" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Email</label>
+                  <Input 
+                    id="contactEmail" 
+                    type="email"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    className="bg-transparent border-white/10 focus:border-accent h-12 text-lg font-light rounded-none"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="message" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Message</label>
+                <Textarea 
+                  id="message" 
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="bg-transparent border-white/10 focus:border-accent min-h-[200px] text-lg font-light rounded-none resize-none"
+                  placeholder="How can we work together?"
+                />
+              </div>
 
-            {/* Location */}
-            <div className="flex items-start gap-4">
-              <MapPin className="h-6 w-6 text-accent mt-1" />
-              <div>
-                <h3 className="font-serif text-xl font-medium text-foreground mb-2">
-                  Based in Philadelphia
-                </h3>
+              <Button 
+                type="submit"
+                size="lg"
+                className="w-full md:w-auto rounded-none bg-white text-black hover:bg-accent hover:text-white transition-colors font-mono uppercase tracking-widest"
+              >
+                <Mail className="mr-2 h-4 w-4" />
+                Send Message
+              </Button>
+            </form>
+          </div>
+
+          {/* Newsletter Signup - Mailchimp Integration */}
+          <div className="pt-16 border-t border-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+              <div className="space-y-4">
+                <h3 className="font-serif text-2xl text-white">Join the List</h3>
                 <p className="font-sans text-muted-foreground">
-                  Philadelphia, Pennsylvania
+                  Occasional updates on music, projects, and teaching. No spam, ever.
                 </p>
               </div>
-            </div>
-
-            {/* Social Links */}
-            <div>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-6">
-                Connect on Social
-              </h3>
-              <div className="space-y-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 group"
-                  >
-                    <div className="p-3 border border-border bg-card group-hover:border-accent group-hover:bg-accent/10 transition-colors">
-                      <social.icon className="h-5 w-5 text-foreground group-hover:text-accent transition-colors" />
-                    </div>
-                    <div>
-                      <span className="font-sans text-foreground group-hover:text-accent transition-colors block">
-                        {social.label}
-                      </span>
-                      <span className="font-mono text-sm text-muted-foreground">
-                        {social.handle}
-                      </span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Options */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
-          >
-            {/* Music Education Inquiry */}
-            <div className="p-8 border border-border bg-card">
-              <div className="flex items-center gap-3 mb-4">
-                <Mail className="h-5 w-5 text-accent" />
-                <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                  Music Education
-                </span>
-              </div>
-              <h3 className="font-serif text-2xl font-medium text-foreground mb-4">
-                Interested in Piano Lessons?
-              </h3>
-              <p className="font-sans text-muted-foreground mb-6 leading-relaxed">
-                Fill out the student inquiry form to learn more about private instruction and availability.
-              </p>
-              <Link href="/education">
-                <Button
-                  variant="outline"
-                  className="font-mono text-sm uppercase tracking-wider border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+              
+              {/* Mailchimp Form */}
+              <form 
+                action="https://geneburke.us5.list-manage.com/subscribe/post?u=681b757d49392c31f551e0304&amp;id=16cc329b54&amp;f_id=00ef2aebf0" 
+                method="post" 
+                id="mc-embedded-subscribe-form" 
+                name="mc-embedded-subscribe-form" 
+                target="_blank"
+                className="flex gap-0"
+              >
+                <Input 
+                  type="email" 
+                  name="EMAIL"
+                  id="mce-EMAIL"
+                  placeholder="Email address" 
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-transparent border-white/10 border-r-0 focus:border-accent h-12 rounded-none flex-grow"
+                />
+                {/* Honeypot field to prevent bot signups */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
+                  <input type="text" name="b_681b757d49392c31f551e0304_16cc329b54" tabIndex={-1} defaultValue="" />
+                </div>
+                <Button 
+                  type="submit"
+                  name="subscribe"
+                  className="h-12 rounded-none bg-white/10 text-white hover:bg-accent border border-white/10 border-l-0"
                 >
-                  Go to Education Page
+                  <ArrowRight className="h-5 w-5" />
+                  <span className="sr-only">Subscribe</span>
                 </Button>
-              </Link>
+              </form>
             </div>
+          </div>
 
-            {/* Booking & Collaboration */}
-            <div className="p-8 border border-border bg-card">
-              <div className="flex items-center gap-3 mb-4">
-                <Mail className="h-5 w-5 text-accent" />
-                <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                  Bookings & Collaborations
-                </span>
-              </div>
-              <h3 className="font-serif text-2xl font-medium text-foreground mb-4">
-                Work Together
-              </h3>
-              <p className="font-sans text-muted-foreground mb-6 leading-relaxed">
-                For performance bookings, production work, or collaborative projects, reach out through social media or the Master Key Music Group.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://www.instagram.com/genejburke"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    variant="outline"
-                    className="font-mono text-sm uppercase tracking-wider border-accent text-accent hover:bg-accent hover:text-accent-foreground"
-                  >
-                    <Instagram className="h-4 w-4 mr-2" />
-                    Message on Instagram
-                  </Button>
-                </a>
-              </div>
-            </div>
-
-            {/* Ministry */}
-            <div className="p-8 border border-border bg-card">
-              <div className="flex items-center gap-3 mb-4">
-                <Mail className="h-5 w-5 text-accent" />
-                <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                  Ministry
-                </span>
-              </div>
-              <h3 className="font-serif text-2xl font-medium text-foreground mb-4">
-                Salt & Light Community Church
-              </h3>
-              <p className="font-sans text-muted-foreground leading-relaxed">
-                Gene serves as Minister of Music at Salt & Light Community Church in Philadelphia, PA.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-24 md:mt-32 pt-16 border-t border-border"
-        >
-          <blockquote className="max-w-3xl">
-            <p className="font-serif text-2xl md:text-3xl font-light italic text-foreground leading-relaxed mb-6">
-              "He approaches every song as a conversation, every rehearsal as a shared table."
-            </p>
-            <footer className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-              — On Gene's approach to music
-            </footer>
-          </blockquote>
         </motion.div>
       </div>
+
+      {/* Success Modal */}
+      <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
+        <DialogContent className="bg-[#1a1a1a] border-white/10 text-white max-w-md">
+          <DialogHeader className="text-center space-y-4">
+            <div className="mx-auto">
+              <CheckCircle className="w-16 h-16 text-accent" />
+            </div>
+            <DialogTitle className="font-serif text-3xl font-light">
+              Opening Email Client
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground text-base">
+              Your default email client should open with the message. If it doesn't, please email directly at contact@geneburke.com
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-center pt-4">
+            <Button
+              onClick={() => setShowSuccessModal(false)}
+              className="rounded-none bg-white text-black hover:bg-accent hover:text-white transition-colors font-mono uppercase tracking-widest"
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

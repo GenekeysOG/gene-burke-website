@@ -4,6 +4,7 @@ import { Play, X, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
+
 interface Release {
   title: string;
   year: string;
@@ -20,7 +21,7 @@ const releases: Release[] = [
   {
     title: "Creator G-d (Masterpiece)",
     year: "2025",
-    cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop",
+    cover: "/images/Creator G-d (Masterpiece) - Cover Art.jpg",
     link: "https://clearproject.bandcamp.com/track/creator-g-d-masterpiece-gene-fatima-burke",
     credits: "Written & Produced by Gene Burke, Performed by Jaelyn Neal Holland",
     embedType: "bandcamp",
@@ -29,7 +30,7 @@ const releases: Release[] = [
   {
     title: "No Hiding Place",
     year: "2025",
-    cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop",
+    cover: "/images/No Hiding Place - Cover Art.jpg",
     link: "https://clearproject.bandcamp.com/track/no-hiding-place-gene-fatima-burke",
     credits: "Written by Fatima Burke & Gene Burke. Vocals: Malachi Holland and Jaelyn Neal Holland",
     embedType: "bandcamp",
@@ -38,7 +39,7 @@ const releases: Release[] = [
   {
     title: "In The Beginning",
     year: "2025",
-    cover: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=600&h=600&fit=crop",
+    cover: "/images/In The Beginning - Cover Art.jpg",
     link: "https://clearproject.bandcamp.com/track/in-the-beginning-gene-fatima-burke",
     credits: "Written by Fatima Burke. Produced by Gene Burke. Vocals: Jaelyn Neal Holland",
     embedType: "bandcamp",
@@ -47,7 +48,7 @@ const releases: Release[] = [
   {
     title: "So Good (Creator of Everything)",
     year: "2025",
-    cover: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&h=600&fit=crop",
+    cover: "/images/So Good (Creator of Everything) - Cover Art.jpg",
     link: "https://clearproject.bandcamp.com/track/so-good-creator-of-everything-gene-fatima-burke",
     credits: "Written by Fatima Burke and Gene Burke. Vocals: Lyric Williams, Jamila Cole, Salt & Light Ensemble",
     embedType: "bandcamp",
@@ -56,7 +57,7 @@ const releases: Release[] = [
   {
     title: "I Need You",
     year: "2025",
-    cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=600&fit=crop",
+    cover: "/images/I Need You - Cover Art.jpg",
     link: "https://clearproject.bandcamp.com/track/i-need-you-gene-fatima-burke",
     credits: "Written, Performed, and Programmed by Gene Burke",
     embedType: "bandcamp",
@@ -65,7 +66,7 @@ const releases: Release[] = [
   {
     title: "Day After Day",
     year: "2025",
-    cover: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600&h=600&fit=crop",
+    cover: "/images/Day After Day - Cover Art.jpg",
     link: "https://clearproject.bandcamp.com/track/day-after-day-gene-fatima-burke",
     credits: "Written and Produced by Gene Burke. Vocals: Amir Johnson, Jaelyn Neal Holland, Jamila Cole, Charise Johnson",
     embedType: "bandcamp",
@@ -74,7 +75,7 @@ const releases: Release[] = [
   {
     title: "Just In Case",
     year: "2023",
-    cover: "https://images.unsplash.com/photo-1571974599782-87624638275e?w=600&h=600&fit=crop",
+    cover: "/images/Just In Case - Cover Art.JPG",
     link: "https://open.spotify.com/album/2UUMRBmhdPHes2MbXQuiSI",
     youtube: "https://youtu.be/Q5jzdFzWQkE?si=5VWNq6HqCvgY516e",
     credits: "Written, produced, and performed by Gene Burke",
@@ -84,7 +85,7 @@ const releases: Release[] = [
   {
     title: "Be Ye Strong",
     year: "2020",
-    cover: "https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=600&h=600&fit=crop",
+    cover: "/images/Be Ye Strong - Cover Art.png",
     link: "https://open.spotify.com/album/32oflcy6N3dx266Sb9EtC5",
     youtube: "https://youtu.be/wGL-H5DMsZI?si=urayfW6JZDFMOtSb",
     credits: "Written and performed by Gene Burke",
@@ -107,18 +108,13 @@ export default function Releases() {
   return (
     <div className="min-h-screen w-full bg-background text-foreground pt-24 pb-24 px-6 md:px-12">
       <div className="container mx-auto max-w-7xl">
-        <motion.div
+        <motion.h1 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-16 md:mb-24"
+          className="font-serif text-5xl md:text-7xl font-light tracking-tight text-white mb-16 md:mb-24"
         >
-          <span className="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-4 block">
-            Discography
-          </span>
-          <h1 className="font-serif text-5xl md:text-7xl font-light tracking-tight text-foreground">
-            Selected <span className="text-accent italic">Works</span>
-          </h1>
-        </motion.div>
+          Selected <span className="text-accent italic">Works</span>
+        </motion.h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-24">
           {releases.map((release, index) => (
@@ -160,9 +156,9 @@ export default function Releases() {
 
               {/* Info */}
               <div className="space-y-2">
-                <div className="flex items-baseline justify-between border-b border-border pb-2">
+                <div className="flex items-baseline justify-between border-b border-white/10 pb-2">
                   <h3 
-                    className="font-serif text-2xl text-foreground group-hover:text-accent transition-colors cursor-pointer"
+                    className="font-serif text-2xl text-white group-hover:text-accent transition-colors cursor-pointer"
                     onClick={() => setSelectedRelease(release)}
                   >
                     {release.title}
@@ -180,20 +176,20 @@ export default function Releases() {
 
       {/* Player Modal */}
       <Dialog open={!!selectedRelease} onOpenChange={() => setSelectedRelease(null)}>
-        <DialogContent className="sm:max-w-lg bg-card border-border p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-lg bg-[#1a1a1a] border-white/10 p-0 overflow-hidden">
           <DialogTitle className="sr-only">{selectedRelease?.title || "Music Player"}</DialogTitle>
           {selectedRelease && (
             <div className="flex flex-col">
               {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-border">
+              <div className="flex items-center justify-between p-4 border-b border-white/10">
                 <div>
-                  <h3 className="font-serif text-xl text-foreground">{selectedRelease.title}</h3>
+                  <h3 className="font-serif text-xl text-white">{selectedRelease.title}</h3>
                   <p className="font-mono text-sm text-muted-foreground">{selectedRelease.year}</p>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="text-muted-foreground hover:text-foreground hover:bg-muted"
+                  className="text-white/60 hover:text-white hover:bg-white/10"
                   onClick={() => setSelectedRelease(null)}
                 >
                   <X className="h-5 w-5" />
@@ -222,7 +218,7 @@ export default function Releases() {
               </div>
 
               {/* Credits */}
-              <div className="p-4 border-t border-border">
+              <div className="p-4 border-t border-white/10">
                 <p className="font-sans text-sm text-muted-foreground leading-relaxed">
                   {selectedRelease.credits}
                 </p>

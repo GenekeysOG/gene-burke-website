@@ -1,82 +1,22 @@
-import { Link } from "wouter";
-import { Instagram, Linkedin, Youtube } from "lucide-react";
-
-const socialLinks = [
-  { href: "https://www.instagram.com/genejburke", icon: Instagram, label: "Instagram" },
-  { href: "https://www.linkedin.com/in/genekeysburke/", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://www.youtube.com/@genejburke", icon: Youtube, label: "YouTube" },
-];
+import { useLocation } from "wouter";
+import { cn } from "@/lib/utils";
 
 export default function Footer() {
+  const [location] = useLocation();
+  const isEducationPage = location === "/education";
+  const isHomePage = location === "/";
+
   return (
-    <footer className="border-t border-border bg-background/50">
-      <div className="container mx-auto px-6 md:px-12 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-          {/* Brand */}
-          <div className="space-y-4">
-            <Link href="/">
-              <span className="font-serif text-2xl font-medium text-foreground">
-                Gene Burke
-              </span>
-            </Link>
-            <p className="font-sans text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Musician, Music Minister, Educator, and Producer. Rooted in gospel and jazz, shaped by choral tradition.
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-              Navigation
-            </h4>
-            <nav className="flex flex-col gap-2">
-              {[
-                { href: "/bio", label: "Bio" },
-                { href: "/releases", label: "Releases" },
-                { href: "/projects", label: "Projects" },
-                { href: "/education", label: "Education" },
-                { href: "/contact", label: "Contact" },
-              ].map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <span className="font-sans text-sm text-muted-foreground hover:text-accent transition-colors">
-                    {link.label}
-                  </span>
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Social & Contact */}
-          <div className="space-y-4">
-            <h4 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-              Connect
-            </h4>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="font-mono text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Gene Burke. All rights reserved.
-          </p>
-          <p className="font-mono text-xs text-muted-foreground">
-            Master Key Music Group
-          </p>
-        </div>
+    <footer className={cn(
+      "py-6 text-center text-sm font-sans",
+      isEducationPage 
+        ? "bg-[#faf9f7] text-[#1a1a1a]/60 border-t border-[#1a1a1a]/10" 
+        : isHomePage
+          ? "absolute bottom-0 left-0 right-0 text-white/50"
+          : "bg-background text-foreground/50 border-t border-border/10"
+    )}>
+      <div className="container">
+        <p>© Copyright 2026 Master Key Music Group LLC. All Rights Reserved.</p>
       </div>
     </footer>
   );

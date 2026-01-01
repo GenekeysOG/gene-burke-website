@@ -1,124 +1,97 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/bio", label: "Bio" },
-  { href: "/releases", label: "Releases" },
-  { href: "/projects", label: "Projects" },
-  { href: "/education", label: "Education" },
-  { href: "/contact", label: "Contact" },
-];
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 export default function Navigation() {
-  const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [location] = useLocation();
+  const isEducationPage = location === "/education";
+  const isHomePage = location === "/";
+  // Look Up Radio page now shows the home link with dark background
+  
+  // Pages where the home link is hidden (no background needed)
+  const hideHomeLinkPages = isHomePage;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  // Close menu when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
 
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Bio", path: "/bio" },
+    { name: "Releases", path: "/releases" },
+    { name: "Projects", path: "/projects" },
+    { name: "Music Education", path: "/education" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="container mx-auto px-6 md:px-12">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/">
-            <motion.span
-              className="font-serif text-2xl font-medium tracking-tight text-foreground hover:text-accent transition-colors"
-              whileHover={{ scale: 1.02 }}
+    <nav className={cn(
+      "fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300",
+      isEducationPage 
+        ? "text-foreground bg-white/90 backdrop-blur-sm" 
+        : hideHomeLinkPages 
+          ? "text-white mix-blend-difference" 
+          : "text-white bg-background/90 backdrop-blur-sm"
+    )}>
+      <div className="container flex items-center justify-between">
+        {/* Identity Line - Only visible on non-home pages */}
+        <Link 
+          href="/"
+          className={cn(
+            "text-lg font-serif tracking-tight hover:opacity-70 transition-opacity",
+            isHomePage ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}
+        >
+          <span className={isEducationPage ? "text-[#1a1a1a]" : ""}>Gene</span> <span className="italic text-accent">Burke</span>
+        </Link>
+
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:bg-transparent focus:ring-0"
             >
-              Gene Burke
-            </motion.span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <span
-                  className={`font-mono text-sm uppercase tracking-wider transition-colors relative group ${
-                    location === link.href
-                      ? "text-accent"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ${
-                      location === link.href ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
-                </span>
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-foreground hover:text-accent hover:bg-transparent"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-background/98 backdrop-blur-md border-b border-border overflow-hidden"
-          >
-            <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <Link href={link.href}>
-                    <span
-                      className={`block font-mono text-lg uppercase tracking-wider py-2 transition-colors ${
-                        location === link.href
-                          ? "text-accent"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
+              <Menu className={cn("h-8 w-8 stroke-[1.5]", isEducationPage && "text-[#1a1a1a]")} />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-full sm:w-[400px] bg-background border-l border-border/10 p-0">
+            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+            <div className="flex flex-col h-full justify-center p-12">
+              <ul className="space-y-8">
+                {navItems.map((item) => (
+                  <li key={item.path}>
+                    <Link 
+                      href={item.path}
+                      className={cn(
+                        "block text-4xl md:text-5xl font-serif font-light tracking-tight transition-colors hover:text-accent",
+                        location === item.path ? "text-accent italic" : "text-foreground"
+                      )}
                     >
-                      {link.label}
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              
+              <div className="mt-20 space-y-4">
+                <p className="text-sm font-mono text-muted-foreground uppercase tracking-widest">Connect</p>
+                <div className="flex gap-6">
+                  <a href="https://www.instagram.com/genejburke" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-accent transition-colors">Instagram</a>
+                  <a href="https://www.linkedin.com/in/genekeysburke/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-accent transition-colors">LinkedIn</a>
+                  <a href="https://www.youtube.com/@genejburke" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-accent transition-colors">YouTube</a>
+                </div>
+              </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </nav>
   );
 }

@@ -10,19 +10,24 @@ import Releases from "./pages/Releases";
 import Projects from "./pages/Projects";
 import Education from "./pages/Education";
 import Contact from "./pages/Contact";
+import LookUpRadio from "./pages/LookUpRadio";
+import ClearProject from "./pages/ClearProject";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/bio" component={Bio} />
-      <Route path="/releases" component={Releases} />
-      <Route path="/projects" component={Projects} />
-      <Route path="/education" component={Education} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/404" component={NotFound} />
+      <Route path={"/"} component={Home} />
+      <Route path={"/bio"} component={Bio} />
+      <Route path={"/releases"} component={Releases} />
+      <Route path={"/projects"} component={Projects} />
+      <Route path={"/education"} component={Education} />
+      <Route path={"/contact"} component={Contact} />
+      <Route path={"/projects/look-up-radio"} component={LookUpRadio} />
+      <Route path={"/projects/clear"} component={ClearProject} />
+      
+      <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -31,16 +36,15 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider
+        defaultTheme="dark"
+      >
         <TooltipProvider>
-          <div className="grain-overlay min-h-screen flex flex-col">
-            <Navigation />
-            <main className="flex-1">
-              <Router />
-            </main>
-            <Footer />
-          </div>
           <Toaster />
+          <Navigation />
+          <Router />
+          <Footer />
+          <div className="grain-overlay" />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
