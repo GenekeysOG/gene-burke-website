@@ -9,9 +9,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowRight, CheckCircle, Mail } from "lucide-react";
+import { ArrowRight, CheckCircle, Mail, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+
+// JotForm API configuration
+const JOTFORM_API_KEY = "8c8cea31119f56bfdeeecfe085d02e8e";
+const CONTACT_FORM_ID = "260004248937052";
 
 export default function Contact() {
   const [email, setEmail] = useState("");
@@ -19,23 +23,50 @@ export default function Contact() {
   const [contactEmail, setContactEmail] = useState("");
   const [message, setMessage] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !contactEmail.trim() || !message.trim()) {
-      toast.error("Please fill in all fields");
+    
+    if (!contactEmail.trim() || !message.trim()) {
+      toast.error("Please fill in all required fields");
       return;
     }
-    
-    // Create mailto link with form data
-    const subject = encodeURIComponent(`Contact from ${name.trim()}`);
-    const body = encodeURIComponent(`Name: ${name.trim()}\nEmail: ${contactEmail.trim()}\n\nMessage:\n${message.trim()}`);
-    window.location.href = `mailto:contact@geneburke.com?subject=${subject}&body=${body}`;
-    
-    setShowSuccessModal(true);
-    setName("");
-    setContactEmail("");
-    setMessage("");
+
+    setIsSubmitting(true);
+
+    try {
+      // Submit to JotForm API
+      // Field mappings: 6=Name, 4=Email, 5=Message
+      const formData = new FormData();
+      formData.append("submission[6]", name.trim());
+      formData.append("submission[4]", contactEmail.trim());
+      formData.append("submission[5]", message.trim());
+
+      const response = await fetch(
+        `https://api.jotform.com/form/${CONTACT_FORM_ID}/submissions?apiKey=${JOTFORM_API_KEY}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.responseCode === 200) {
+        setShowSuccessModal(true);
+        setName("");
+        setContactEmail("");
+        setMessage("");
+      } else {
+        throw new Error(result.message || "Failed to submit form");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("Failed to send message. Please try again or email directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -67,17 +98,20 @@ export default function Contact() {
                     id="name" 
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    disabled={isSubmitting}
                     className="bg-transparent border-white/10 focus:border-accent h-12 text-lg font-light rounded-none"
                     placeholder="Your name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="contactEmail" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Email</label>
+                  <label htmlFor="contactEmail" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Email *</label>
                   <Input 
                     id="contactEmail" 
                     type="email"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
+                    disabled={isSubmitting}
+                    required
                     className="bg-transparent border-white/10 focus:border-accent h-12 text-lg font-light rounded-none"
                     placeholder="your@email.com"
                   />
@@ -85,11 +119,13 @@ export default function Contact() {
               </div>
               
               <div className="space-y-2">
-                <label htmlFor="message" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Message</label>
+                <label htmlFor="message" className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Message *</label>
                 <Textarea 
                   id="message" 
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
+                  disabled={isSubmitting}
+                  required
                   className="bg-transparent border-white/10 focus:border-accent min-h-[200px] text-lg font-light rounded-none resize-none"
                   placeholder="How can we work together?"
                 />
@@ -98,10 +134,20 @@ export default function Contact() {
               <Button 
                 type="submit"
                 size="lg"
+                disabled={isSubmitting}
                 className="w-full md:w-auto rounded-none bg-white text-black hover:bg-accent hover:text-white transition-colors font-mono uppercase tracking-widest"
               >
-                <Mail className="mr-2 h-4 w-4" />
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Mail className="mr-2 h-4 w-4" />
+                    Send Message
+                  </>
+                )}
               </Button>
             </form>
           </div>
@@ -162,10 +208,10 @@ export default function Contact() {
               <CheckCircle className="w-16 h-16 text-accent" />
             </div>
             <DialogTitle className="font-serif text-3xl font-light">
-              Opening Email Client
+              Message Sent
             </DialogTitle>
             <DialogDescription className="text-muted-foreground text-base">
-              Your default email client should open with the message. If it doesn't, please email directly at contact@geneburke.com
+              Thank you for reaching out! I'll get back to you as soon as possible.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-center pt-4">
