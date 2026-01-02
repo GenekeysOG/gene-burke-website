@@ -14,6 +14,7 @@ import LookUpRadio from "./pages/LookUpRadio";
 import ClearProject from "./pages/ClearProject";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -41,6 +42,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <ScrollToTop />
           <Navigation />
           <Router />
           <Footer />
