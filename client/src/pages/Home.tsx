@@ -35,7 +35,10 @@ export default function Home() {
             Gene <span className="text-accent italic">Burke</span>
           </h1>
           <h2 className="mt-2 font-mono text-sm md:text-base tracking-widest uppercase text-white/80 mix-blend-difference md:pl-[10px]">
-            Gospel & Jazz Musician, Pianist & Music Educator
+            <span className="block md:inline">Gospel & Jazz Musician</span>
+            <span className="hidden md:inline">,</span>
+            <br className="hidden md:block" />
+            <span className="block md:inline">Pianist & Music Educator</span>
           </h2>
         </motion.div>
 
