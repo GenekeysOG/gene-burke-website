@@ -57,10 +57,15 @@ export default function Education() {
     e.preventDefault();
 
     // Validate required fields
+    const isAdult = studentType === "Adult";
     if (!studentType || !studentFirstName || !studentEmail || !studentBirthday || 
-        !parentFirstName || !parentLastName || !lessonDuration ||
-        !studentAddress || !studentCity || !studentState || !studentZip) {
+        !lessonDuration || !studentAddress || !studentCity || !studentState || !studentZip) {
       toast.error("Please fill in all required fields");
+      return;
+    }
+    // Parent info required only for non-adults
+    if (!isAdult && (!parentFirstName || !parentLastName)) {
+      toast.error("Please fill in parent/guardian information");
       return;
     }
 
@@ -256,7 +261,6 @@ export default function Education() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Child">Child</SelectItem>
-                      <SelectItem value="Teen">Teen</SelectItem>
                       <SelectItem value="Adult">Adult</SelectItem>
                     </SelectContent>
                   </Select>
@@ -369,60 +373,65 @@ export default function Education() {
                   />
                 </div>
 
-                {/* Divider */}
-                <div className="border-t border-[#1a1a1a]/10 pt-6">
-                  <p className="font-mono text-xs uppercase tracking-widest text-[#c06c58] mb-4">Parent/Guardian Information</p>
-                </div>
+                {/* Parent/Guardian Information - Hidden for Adults */}
+                {studentType !== "Adult" && (
+                  <>
+                    {/* Divider */}
+                    <div className="border-t border-[#1a1a1a]/10 pt-6">
+                      <p className="font-mono text-xs uppercase tracking-widest text-[#c06c58] mb-4">Parent/Guardian Information</p>
+                    </div>
 
-                {/* Parent Name */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className={gridLabelStyles}>Parent First Name *</label>
-                    <Input 
-                      value={parentFirstName}
-                      onChange={(e) => setParentFirstName(e.target.value)}
-                      disabled={isSubmitting}
-                      className={inputStyles}
-                      placeholder="First name"
-                    />
-                  </div>
-                  <div>
-                    <label className={gridLabelStyles}>Last Name *</label>
-                    <Input 
-                      value={parentLastName}
-                      onChange={(e) => setParentLastName(e.target.value)}
-                      disabled={isSubmitting}
-                      className={inputStyles}
-                      placeholder="Last name"
-                    />
-                  </div>
-                </div>
+                    {/* Parent Name */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className={gridLabelStyles}>Parent First Name *</label>
+                        <Input 
+                          value={parentFirstName}
+                          onChange={(e) => setParentFirstName(e.target.value)}
+                          disabled={isSubmitting}
+                          className={inputStyles}
+                          placeholder="First name"
+                        />
+                      </div>
+                      <div>
+                        <label className={gridLabelStyles}>Last Name *</label>
+                        <Input 
+                          value={parentLastName}
+                          onChange={(e) => setParentLastName(e.target.value)}
+                          disabled={isSubmitting}
+                          className={inputStyles}
+                          placeholder="Last name"
+                        />
+                      </div>
+                    </div>
 
-                {/* Parent Email */}
-                <div className="space-y-2">
-                  <label className={labelStyles}>Parent Email</label>
-                  <Input 
-                    type="email"
-                    value={parentEmail}
-                    onChange={(e) => setParentEmail(e.target.value)}
-                    disabled={isSubmitting}
-                    className={inputStyles}
-                    placeholder="parent@email.com"
-                  />
-                </div>
+                    {/* Parent Email */}
+                    <div className="space-y-2">
+                      <label className={labelStyles}>Parent Email</label>
+                      <Input 
+                        type="email"
+                        value={parentEmail}
+                        onChange={(e) => setParentEmail(e.target.value)}
+                        disabled={isSubmitting}
+                        className={inputStyles}
+                        placeholder="parent@email.com"
+                      />
+                    </div>
 
-                {/* Parent Phone */}
-                <div className="space-y-2">
-                  <label className={labelStyles}>Parent Phone</label>
-                  <Input 
-                    type="tel"
-                    value={parentPhone}
-                    onChange={(e) => setParentPhone(e.target.value)}
-                    disabled={isSubmitting}
-                    className={inputStyles}
-                    placeholder="(555) 555-5555"
-                  />
-                </div>
+                    {/* Parent Phone */}
+                    <div className="space-y-2">
+                      <label className={labelStyles}>Parent Phone</label>
+                      <Input 
+                        type="tel"
+                        value={parentPhone}
+                        onChange={(e) => setParentPhone(e.target.value)}
+                        disabled={isSubmitting}
+                        className={inputStyles}
+                        placeholder="(555) 555-5555"
+                      />
+                    </div>
+                  </>
+                )}
 
                 {/* Lesson Duration */}
                 <div className="space-y-2">
