@@ -43,7 +43,7 @@ export default function LookUpRadio() {
           className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden rounded-lg"
         >
           <img
-            src="/images/projects/look-up-radio-mission.jpg"
+            src="/images/look-up-radio-mission.jpg"
             alt="Look Up Radio Mission"
             className="w-full h-full object-cover"
           />
@@ -170,7 +170,7 @@ export default function LookUpRadio() {
             className="mb-16 relative aspect-[4/3] overflow-hidden rounded-lg"
           >
             <img
-              src="/images/projects/look-up-radio-6-year.jpg"
+              src="/images/6-Year.jpg"
               alt="Look Up Radio 6 Year Anniversary"
               className="w-full h-full object-cover"
             />

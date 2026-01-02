@@ -74,7 +74,7 @@ export default function ClearProject() {
       <section className="container pb-16">
         <div className="relative aspect-[16/9] max-w-4xl overflow-hidden rounded-lg">
           <img 
-            src="/assets/clear-team-stage.jpeg" 
+            src="/images/clear-team-stage.jpeg" 
             alt="CLEAR Project team on stage"
             className="w-full h-full object-cover"
           />
@@ -104,14 +104,14 @@ export default function ClearProject() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
           <div className="aspect-[4/3] overflow-hidden rounded-lg">
             <img 
-              src="/assets/clear-listening-session.jpeg" 
+              src="/images/clear-listening-session.jpeg" 
               alt="CLEAR listening session"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="aspect-[4/3] overflow-hidden rounded-lg">
             <img 
-              src="/assets/clear-piano-talk.jpeg" 
+              src="/images/clear-piano-talk.jpeg" 
               alt="Gene at piano during CLEAR session"
               className="w-full h-full object-cover"
             />
@@ -155,7 +155,7 @@ export default function ClearProject() {
       <section className="container pb-16">
         <div className="relative aspect-[16/9] max-w-4xl overflow-hidden rounded-lg">
           <img 
-            src="/assets/clear-group-photo.jpeg" 
+            src="/images/clear-group-photo.jpeg" 
             alt="CLEAR Project group photo"
             className="w-full h-full object-cover"
           />
