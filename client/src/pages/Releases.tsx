@@ -21,7 +21,7 @@ const releases: Release[] = [
   {
     title: "Creator G-d (Masterpiece)",
     year: "2025",
-    cover: "/images/Creator G-d (Masterpiece) - Cover Art.jpg",
+    cover: "/images/creator-gd-masterpiece-cover.jpg",
     link: "https://clearproject.bandcamp.com/track/creator-g-d-masterpiece-gene-fatima-burke",
     credits: "Written & Produced by Gene Burke, Performed by Jaelyn Neal Holland",
     embedType: "bandcamp",
@@ -30,7 +30,7 @@ const releases: Release[] = [
   {
     title: "No Hiding Place",
     year: "2025",
-    cover: "/images/No Hiding Place - Cover Art.jpg",
+    cover: "/images/no-hiding-place-cover.jpg",
     link: "https://clearproject.bandcamp.com/track/no-hiding-place-gene-fatima-burke",
     credits: "Written by Fatima Burke & Gene Burke. Vocals: Malachi Holland and Jaelyn Neal Holland",
     embedType: "bandcamp",
@@ -39,7 +39,7 @@ const releases: Release[] = [
   {
     title: "In The Beginning",
     year: "2025",
-    cover: "/images/In The Beginning - Cover Art.jpg",
+    cover: "/images/in-the-beginning-cover.jpg",
     link: "https://clearproject.bandcamp.com/track/in-the-beginning-gene-fatima-burke",
     credits: "Written by Fatima Burke. Produced by Gene Burke. Vocals: Jaelyn Neal Holland",
     embedType: "bandcamp",
@@ -48,7 +48,7 @@ const releases: Release[] = [
   {
     title: "So Good (Creator of Everything)",
     year: "2025",
-    cover: "/images/So Good (Creator of Everything) - Cover Art.jpg",
+    cover: "/images/so-good-cover.jpg",
     link: "https://clearproject.bandcamp.com/track/so-good-creator-of-everything-gene-fatima-burke",
     credits: "Written by Fatima Burke and Gene Burke. Vocals: Lyric Williams, Jamila Cole, Salt & Light Ensemble",
     embedType: "bandcamp",
@@ -57,7 +57,7 @@ const releases: Release[] = [
   {
     title: "I Need You",
     year: "2025",
-    cover: "/images/I Need You - Cover Art.jpg",
+    cover: "/images/i-need-you-cover.jpg",
     link: "https://clearproject.bandcamp.com/track/i-need-you-gene-fatima-burke",
     credits: "Written, Performed, and Programmed by Gene Burke",
     embedType: "bandcamp",
@@ -66,7 +66,7 @@ const releases: Release[] = [
   {
     title: "Day After Day",
     year: "2025",
-    cover: "/images/Day After Day - Cover Art.jpg",
+    cover: "/images/day-after-day-cover.jpg",
     link: "https://clearproject.bandcamp.com/track/day-after-day-gene-fatima-burke",
     credits: "Written and Produced by Gene Burke. Vocals: Amir Johnson, Jaelyn Neal Holland, Jamila Cole, Charise Johnson",
     embedType: "bandcamp",
@@ -75,7 +75,7 @@ const releases: Release[] = [
   {
     title: "Just In Case",
     year: "2023",
-    cover: "/images/Just In Case - Cover Art.JPG",
+    cover: "/images/just-in-case-cover.jpg",
     link: "https://open.spotify.com/album/2UUMRBmhdPHes2MbXQuiSI",
     youtube: "https://youtu.be/Q5jzdFzWQkE?si=5VWNq6HqCvgY516e",
     credits: "Written, produced, and performed by Gene Burke",
@@ -85,7 +85,7 @@ const releases: Release[] = [
   {
     title: "Be Ye Strong",
     year: "2020",
-    cover: "/images/Be Ye Strong - Cover Art.png",
+    cover: "/images/be-ye-strong-cover.png",
     link: "https://open.spotify.com/album/32oflcy6N3dx266Sb9EtC5",
     youtube: "https://youtu.be/wGL-H5DMsZI?si=urayfW6JZDFMOtSb",
     credits: "Written and performed by Gene Burke",

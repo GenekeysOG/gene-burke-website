@@ -181,7 +181,7 @@ export default function Education() {
               {/* Teaching Image */}
               <div className="mt-10">
                 <img 
-                  src="/images/IMG_1302.jpg" 
+                  src="/images/education-hero.jpg" 
                   alt="Gene Burke teaching piano" 
                   className="w-full rounded-sm shadow-sm"
                 />

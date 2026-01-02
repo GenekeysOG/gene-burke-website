@@ -15,7 +15,7 @@ export default function Bio() {
           >
             <div className="relative aspect-[3/4] w-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
               <img 
-                src="/images/Gene Headshot 2025.jpg" 
+                src="/images/gene-headshot.jpg" 
                 alt="Gene Burke Portrait" 
                 className="h-full w-full object-cover"
               />

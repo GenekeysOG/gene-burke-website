@@ -10,7 +10,7 @@ export default function Home() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/30 z-10" /> {/* Subtle overlay for text readability */}
         <img 
-          src="/images/Gene Burke - Hero Image.png" 
+          src="/images/gene-burke-hero.png" 
           alt="Gene Burke performing" 
           className="h-full w-full object-cover object-center"
         />
