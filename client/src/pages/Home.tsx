@@ -19,26 +19,29 @@ export default function Home() {
       {/* Content Layer */}
       <div className="relative z-20 flex min-h-screen flex-col justify-between p-6 md:p-12">
         {/* Top Section - Identity */}
+        {/* Mobile: centered at top, Desktop: left-aligned */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mt-20 md:mt-0"
+          className="mt-8 text-center md:mt-0 md:text-left"
         >
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white">
             Gene <span className="text-accent italic">Burke</span>
           </h1>
-          <p className="mt-2 font-mono text-sm md:text-base tracking-widest uppercase text-white/80 mix-blend-difference" style={{paddingLeft: '10px'}}>
+          <p className="mt-2 font-mono text-sm md:text-base tracking-widest uppercase text-white/80 mix-blend-difference md:pl-[10px]">
             Musician & Educator
           </p>
         </motion.div>
 
-        {/* Center/Bottom Section - CTA */}
-        <div className="flex flex-col items-start gap-12 md:flex-row md:items-end md:justify-between">
+        {/* Center/Bottom Section - CTA and Socials */}
+        {/* Mobile: centered in middle, Desktop: bottom left/right split */}
+        <div className="flex flex-1 flex-col items-center justify-center gap-6 md:flex-none md:flex-row md:items-end md:justify-between md:gap-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="flex flex-col items-center md:items-start"
           >
             <Link href="/releases">
               <Button 
@@ -51,11 +54,12 @@ export default function Home() {
           </motion.div>
 
           {/* Footer Socials */}
+          {/* Mobile: centered below CTA, Desktop: right-aligned at bottom */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="flex gap-6 text-white"
+            className="flex gap-6 text-white md:absolute md:bottom-12 md:right-12"
           >
             <a 
               href="https://www.instagram.com/genejburke" 
@@ -84,13 +88,6 @@ export default function Home() {
             >
               <Linkedin className="h-6 w-6 stroke-[1.5]" />
             </a>
-            {/* TikTok icon is not in Lucide default set, using a custom SVG or text fallback if needed, 
-                but brief asked for icons. Lucide doesn't have TikTok. 
-                I will use a simple text link or omit if strictly icon-only is required, 
-                but for now I'll stick to the ones I have icons for to keep it clean. 
-                Actually, I can import a custom SVG for TikTok if critical. 
-                Let's stick to the 3 main ones for now as they are in the assets summary. 
-            */}
           </motion.div>
         </div>
       </div>
