@@ -2,8 +2,13 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "Gene Burke | Gospel & Jazz Musician, Pianist & Music Educator";
+  }, []);
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground">
       {/* Hero Background Image */}
@@ -29,9 +34,9 @@ export default function Home() {
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white">
             Gene <span className="text-accent italic">Burke</span>
           </h1>
-          <p className="mt-2 font-mono text-sm md:text-base tracking-widest uppercase text-white/80 mix-blend-difference md:pl-[10px]">
-            Musician & Educator
-          </p>
+          <h2 className="mt-2 font-mono text-sm md:text-base tracking-widest uppercase text-white/80 mix-blend-difference md:pl-[10px]">
+            Gospel & Jazz Musician, Pianist & Music Educator
+          </h2>
         </motion.div>
 
         {/* Center/Bottom Section - CTA and Socials */}
