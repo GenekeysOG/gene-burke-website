@@ -28,7 +28,7 @@ export default function Home() {
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white">
             Gene <span className="text-accent italic">Burke</span>
           </h1>
-          <p className="mt-2 font-mono text-sm md:text-base tracking-widest uppercase text-white/80 mix-blend-difference">
+          <p className="mt-2 font-mono text-sm md:text-base tracking-widest uppercase text-white/80 mix-blend-difference" style={{paddingLeft: '10px'}}>
             Musician & Educator
           </p>
         </motion.div>
