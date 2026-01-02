@@ -4,7 +4,6 @@ import { Instagram, Linkedin, Youtube } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
-
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground">
       {/* Hero Background Image */}

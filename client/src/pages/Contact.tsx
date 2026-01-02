@@ -12,6 +12,7 @@ import {
 import { ArrowRight, CheckCircle, Mail, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 // JotForm API configuration
 const JOTFORM_API_KEY = "8c8cea31119f56bfdeeecfe085d02e8e";
@@ -24,6 +25,21 @@ export default function Contact() {
   const [message, setMessage] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Newsletter subscription mutation
+  const newsletterMutation = trpc.newsletter.subscribe.useMutation({
+    onSuccess: (data) => {
+      if (data.success) {
+        toast.success(data.message);
+        setEmail("");
+      } else {
+        toast.error(data.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to subscribe. Please try again.");
+    },
+  });
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,6 +83,17 @@ export default function Contact() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    newsletterMutation.mutate({ email: email.trim() });
   };
 
   return (
@@ -152,7 +179,7 @@ export default function Contact() {
             </form>
           </div>
 
-          {/* Newsletter Signup - Mailchimp Integration */}
+          {/* Newsletter Signup - Mailchimp Integration via Backend */}
           <div className="pt-16 border-t border-white/10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
               <div className="space-y-4">
@@ -162,35 +189,30 @@ export default function Contact() {
                 </p>
               </div>
               
-              {/* Mailchimp Form */}
+              {/* Newsletter Form with tRPC */}
               <form 
-                action="https://geneburke.us5.list-manage.com/subscribe/post?u=681b757d49392c31f551e0304&amp;id=16cc329b54&amp;f_id=00ef2aebf0" 
-                method="post" 
-                id="mc-embedded-subscribe-form" 
-                name="mc-embedded-subscribe-form" 
-                target="_blank"
+                onSubmit={handleNewsletterSubmit}
                 className="flex gap-0"
               >
                 <Input 
                   type="email" 
-                  name="EMAIL"
-                  id="mce-EMAIL"
                   placeholder="Email address" 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled={newsletterMutation.isPending}
                   className="bg-transparent border-white/10 border-r-0 focus:border-accent h-12 rounded-none flex-grow"
                 />
-                {/* Honeypot field to prevent bot signups */}
-                <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
-                  <input type="text" name="b_681b757d49392c31f551e0304_16cc329b54" tabIndex={-1} defaultValue="" />
-                </div>
                 <Button 
                   type="submit"
-                  name="subscribe"
+                  disabled={newsletterMutation.isPending}
                   className="h-12 rounded-none bg-white/10 text-white hover:bg-accent border border-white/10 border-l-0"
                 >
-                  <ArrowRight className="h-5 w-5" />
+                  {newsletterMutation.isPending ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <ArrowRight className="h-5 w-5" />
+                  )}
                   <span className="sr-only">Subscribe</span>
                 </Button>
               </form>
