@@ -2,3 +2,4 @@
 - [x] Replace Student Inquiry form with My Music Staff Student Signup widget
 - [x] Add Open Graph meta tags with hero image for social media sharing
 - [x] Add Book CTA button on Home page with modal for Lessons and Collaboration
+- [x] Switch positions of Listen Now and Book buttons on Home page

@@ -70,6 +70,13 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="flex flex-col items-center gap-4 md:flex-row md:items-start"
           >
+            <Button 
+              size="lg" 
+              onClick={() => setIsBookModalOpen(true)}
+              className="h-auto rounded-none border border-accent bg-accent px-8 py-4 font-mono text-sm uppercase tracking-widest text-white transition-all hover:bg-accent/90 hover:border-accent/90"
+            >
+              Book
+            </Button>
             <Link href="/releases">
               <Button 
                 size="lg" 
@@ -78,13 +85,6 @@ export default function Home() {
                 Listen Now
               </Button>
             </Link>
-            <Button 
-              size="lg" 
-              onClick={() => setIsBookModalOpen(true)}
-              className="h-auto rounded-none border border-accent bg-accent px-8 py-4 font-mono text-sm uppercase tracking-widest text-white transition-all hover:bg-accent/90 hover:border-accent/90"
-            >
-              Book
-            </Button>
           </motion.div>
 
           {/* Footer Socials */}
