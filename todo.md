@@ -6,3 +6,4 @@
 - [x] Change Book CTA button color to #BB5A25
 - [x] Make Book modal light-themed
 - [x] Update modal subtitle text to "Click the option that best fits what you're looking for."
+- [x] Update Listen Now button to use dark semi-transparent charcoal fill

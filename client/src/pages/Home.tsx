@@ -80,7 +80,7 @@ export default function Home() {
             <Link href="/releases">
               <Button 
                 size="lg" 
-                className="h-auto rounded-none border border-white/30 bg-white/10 px-8 py-4 font-mono text-sm uppercase tracking-widest text-white backdrop-blur-sm transition-all hover:bg-white hover:text-black hover:border-white"
+                className="h-auto rounded-none border border-white/30 bg-[#1a1a1a]/70 px-8 py-4 font-mono text-sm uppercase tracking-widest text-white backdrop-blur-sm transition-all hover:bg-white hover:text-black hover:border-white"
               >
                 Listen Now
               </Button>
