@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Check, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,11 +24,33 @@ const JOTFORM_API_KEY = "8c8cea31119f56bfdeeecfe085d02e8e";
 const STUDENT_INQUIRY_FORM_ID = "260004236569050";
 
 export default function Education() {
+  // Ref for the My Music Staff widget container
+  const widgetContainerRef = useRef<HTMLDivElement>(null);
+
   // Force light mode on mount, revert on unmount
   useEffect(() => {
     document.documentElement.classList.remove("dark");
     return () => {
       document.documentElement.classList.add("dark");
+    };
+  }, []);
+
+  // Load My Music Staff widget script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://app.mymusicstaff.com/Widget/v4/Widget.ashx?settings=eyJTY2hvb2xJRCI6InNjaF9sdFdKeSIsIldlYnNpdGVJRCI6Indic19WYzZKeCIsIldlYnNpdGVCbG9ja0lEIjoid2JiX3p6cHJoSksifQ==';
+    script.async = true;
+    
+    // Append to the widget container
+    if (widgetContainerRef.current) {
+      widgetContainerRef.current.appendChild(script);
+    }
+
+    return () => {
+      // Cleanup on unmount
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
     };
   }, []);
 
@@ -233,6 +255,20 @@ export default function Education() {
                 <p className="mt-4">
                   I believe progress happens best when students feel both supported and challenged. Lessons are structured but flexible, responsive to each student's learning style, background, and goals. Curiosity is encouraged. Questions are welcomed. Growth is measured over time, not rushed.
                 </p>
+              </div>
+            </div>
+
+            {/* My Music Staff Login Widget */}
+            <div className="space-y-8">
+              <h2 className="font-mono text-sm uppercase tracking-widest text-[#c06c58]">Current Students</h2>
+              <p className="font-sans text-lg text-[#1a1a1a]/70">
+                Already a student? Log in to access your lesson schedule, assignments, and more.
+              </p>
+              <div 
+                ref={widgetContainerRef}
+                className="bg-white p-6 border border-[#1a1a1a]/10 rounded-sm"
+              >
+                {/* My Music Staff widget will be injected here */}
               </div>
             </div>
 
