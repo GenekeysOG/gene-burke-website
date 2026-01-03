@@ -1,3 +1,4 @@
 - [x] Add My Music Staff Student/Parent login widget to Education page
 - [x] Replace Student Inquiry form with My Music Staff Student Signup widget
 - [x] Add Open Graph meta tags with hero image for social media sharing
+- [x] Add Book CTA button on Home page with modal for Lessons and Collaboration

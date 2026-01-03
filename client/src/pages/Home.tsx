@@ -1,13 +1,32 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Instagram, Linkedin, Youtube } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Instagram, Linkedin, Youtube, Music, Users } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [, setLocation] = useLocation();
+  const [isBookModalOpen, setIsBookModalOpen] = useState(false);
+
   useEffect(() => {
     document.title = "Gene Burke | Gospel & Jazz Musician, Pianist & Music Educator";
   }, []);
+
+  const handleLessonsClick = () => {
+    setIsBookModalOpen(false);
+    setLocation("/education");
+  };
+
+  const handleCollaborationClick = () => {
+    setIsBookModalOpen(false);
+    setLocation("/contact");
+  };
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground">
@@ -49,7 +68,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="flex flex-col items-center md:items-start"
+            className="flex flex-col items-center gap-4 md:flex-row md:items-start"
           >
             <Link href="/releases">
               <Button 
@@ -59,6 +78,13 @@ export default function Home() {
                 Listen Now
               </Button>
             </Link>
+            <Button 
+              size="lg" 
+              onClick={() => setIsBookModalOpen(true)}
+              className="h-auto rounded-none border border-accent bg-accent px-8 py-4 font-mono text-sm uppercase tracking-widest text-white transition-all hover:bg-accent/90 hover:border-accent/90"
+            >
+              Book
+            </Button>
           </motion.div>
 
           {/* Footer Socials */}
@@ -99,6 +125,54 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
+
+      {/* Book Modal */}
+      <Dialog open={isBookModalOpen} onOpenChange={setIsBookModalOpen}>
+        <DialogContent className="bg-black/95 border border-white/20 text-white max-w-md backdrop-blur-xl">
+          <DialogHeader className="text-center space-y-2">
+            <DialogTitle className="font-serif text-3xl font-light">
+              Book <span className="text-accent italic">Gene</span>
+            </DialogTitle>
+            <p className="font-mono text-xs uppercase tracking-widest text-white/60">
+              What are you looking for?
+            </p>
+          </DialogHeader>
+          <div className="grid grid-cols-1 gap-4 pt-6">
+            <button
+              onClick={handleLessonsClick}
+              className="group flex items-center gap-4 p-6 border border-white/20 rounded-none bg-transparent hover:bg-accent hover:border-accent transition-all duration-300"
+            >
+              <div className="flex h-12 w-12 items-center justify-center border border-white/30 group-hover:border-white/50 transition-colors">
+                <Music className="h-6 w-6 text-accent group-hover:text-white transition-colors" />
+              </div>
+              <div className="text-left">
+                <h3 className="font-mono text-sm uppercase tracking-widest text-white">
+                  Lessons
+                </h3>
+                <p className="text-xs text-white/60 group-hover:text-white/80 transition-colors mt-1">
+                  Piano instruction for all ages & skill levels
+                </p>
+              </div>
+            </button>
+            <button
+              onClick={handleCollaborationClick}
+              className="group flex items-center gap-4 p-6 border border-white/20 rounded-none bg-transparent hover:bg-accent hover:border-accent transition-all duration-300"
+            >
+              <div className="flex h-12 w-12 items-center justify-center border border-white/30 group-hover:border-white/50 transition-colors">
+                <Users className="h-6 w-6 text-accent group-hover:text-white transition-colors" />
+              </div>
+              <div className="text-left">
+                <h3 className="font-mono text-sm uppercase tracking-widest text-white">
+                  Collaboration
+                </h3>
+                <p className="text-xs text-white/60 group-hover:text-white/80 transition-colors mt-1">
+                  Live performances, sessions & creative projects
+                </p>
+              </div>
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
