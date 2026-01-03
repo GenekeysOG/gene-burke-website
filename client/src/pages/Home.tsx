@@ -134,7 +134,7 @@ export default function Home() {
               Book <span className="text-[#BB5A25] italic">Gene</span>
             </DialogTitle>
             <p className="font-mono text-xs uppercase tracking-widest text-[#1a1a1a]/60">
-              What are you looking for?
+              Click the option that best fits what you're looking for.
             </p>
           </DialogHeader>
           <div className="grid grid-cols-1 gap-4 pt-6">

@@ -5,3 +5,4 @@
 - [x] Switch positions of Listen Now and Book buttons on Home page
 - [x] Change Book CTA button color to #BB5A25
 - [x] Make Book modal light-themed
+- [x] Update modal subtitle text to "Click the option that best fits what you're looking for."
