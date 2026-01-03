@@ -73,7 +73,7 @@ export default function Home() {
             <Button 
               size="lg" 
               onClick={() => setIsBookModalOpen(true)}
-              className="h-auto rounded-none border border-accent bg-accent px-8 py-4 font-mono text-sm uppercase tracking-widest text-white transition-all hover:bg-accent/90 hover:border-accent/90"
+              className="h-auto rounded-none border border-[#BB5A25] bg-[#BB5A25] px-8 py-4 font-mono text-sm uppercase tracking-widest text-white transition-all hover:bg-[#BB5A25]/90 hover:border-[#BB5A25]/90"
             >
               Book
             </Button>
@@ -128,44 +128,44 @@ export default function Home() {
 
       {/* Book Modal */}
       <Dialog open={isBookModalOpen} onOpenChange={setIsBookModalOpen}>
-        <DialogContent className="bg-black/95 border border-white/20 text-white max-w-md backdrop-blur-xl">
+        <DialogContent className="bg-[#fdfbf7] border border-[#1a1a1a]/10 text-[#1a1a1a] max-w-md">
           <DialogHeader className="text-center space-y-2">
-            <DialogTitle className="font-serif text-3xl font-light">
-              Book <span className="text-accent italic">Gene</span>
+            <DialogTitle className="font-serif text-3xl font-light text-[#1a1a1a]">
+              Book <span className="text-[#BB5A25] italic">Gene</span>
             </DialogTitle>
-            <p className="font-mono text-xs uppercase tracking-widest text-white/60">
+            <p className="font-mono text-xs uppercase tracking-widest text-[#1a1a1a]/60">
               What are you looking for?
             </p>
           </DialogHeader>
           <div className="grid grid-cols-1 gap-4 pt-6">
             <button
               onClick={handleLessonsClick}
-              className="group flex items-center gap-4 p-6 border border-white/20 rounded-none bg-transparent hover:bg-accent hover:border-accent transition-all duration-300"
+              className="group flex items-center gap-4 p-6 border border-[#1a1a1a]/20 rounded-none bg-transparent hover:bg-[#BB5A25] hover:border-[#BB5A25] transition-all duration-300"
             >
-              <div className="flex h-12 w-12 items-center justify-center border border-white/30 group-hover:border-white/50 transition-colors">
-                <Music className="h-6 w-6 text-accent group-hover:text-white transition-colors" />
+              <div className="flex h-12 w-12 items-center justify-center border border-[#1a1a1a]/30 group-hover:border-white/50 transition-colors">
+                <Music className="h-6 w-6 text-[#BB5A25] group-hover:text-white transition-colors" />
               </div>
               <div className="text-left">
-                <h3 className="font-mono text-sm uppercase tracking-widest text-white">
+                <h3 className="font-mono text-sm uppercase tracking-widest text-[#1a1a1a] group-hover:text-white transition-colors">
                   Lessons
                 </h3>
-                <p className="text-xs text-white/60 group-hover:text-white/80 transition-colors mt-1">
+                <p className="text-xs text-[#1a1a1a]/60 group-hover:text-white/80 transition-colors mt-1">
                   Piano instruction for all ages & skill levels
                 </p>
               </div>
             </button>
             <button
               onClick={handleCollaborationClick}
-              className="group flex items-center gap-4 p-6 border border-white/20 rounded-none bg-transparent hover:bg-accent hover:border-accent transition-all duration-300"
+              className="group flex items-center gap-4 p-6 border border-[#1a1a1a]/20 rounded-none bg-transparent hover:bg-[#BB5A25] hover:border-[#BB5A25] transition-all duration-300"
             >
-              <div className="flex h-12 w-12 items-center justify-center border border-white/30 group-hover:border-white/50 transition-colors">
-                <Users className="h-6 w-6 text-accent group-hover:text-white transition-colors" />
+              <div className="flex h-12 w-12 items-center justify-center border border-[#1a1a1a]/30 group-hover:border-white/50 transition-colors">
+                <Users className="h-6 w-6 text-[#BB5A25] group-hover:text-white transition-colors" />
               </div>
               <div className="text-left">
-                <h3 className="font-mono text-sm uppercase tracking-widest text-white">
+                <h3 className="font-mono text-sm uppercase tracking-widest text-[#1a1a1a] group-hover:text-white transition-colors">
                   Collaboration
                 </h3>
-                <p className="text-xs text-white/60 group-hover:text-white/80 transition-colors mt-1">
+                <p className="text-xs text-[#1a1a1a]/60 group-hover:text-white/80 transition-colors mt-1">
                   Live performances, sessions & creative projects
                 </p>
               </div>

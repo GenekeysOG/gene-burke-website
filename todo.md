@@ -3,3 +3,5 @@
 - [x] Add Open Graph meta tags with hero image for social media sharing
 - [x] Add Book CTA button on Home page with modal for Lessons and Collaboration
 - [x] Switch positions of Listen Now and Book buttons on Home page
+- [x] Change Book CTA button color to #BB5A25
+- [x] Make Book modal light-themed
