@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowRight, CheckCircle, Mail, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle, Mail, Loader2, Phone } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
@@ -113,6 +113,15 @@ export default function Contact() {
             <p className="font-sans text-xl font-light text-muted-foreground max-w-2xl">
               For collaborations, music education inquiries, or ongoing connection.
             </p>
+            <div className="flex items-center gap-3 pt-2">
+              <Phone className="h-5 w-5 text-accent" />
+              <a 
+                href="tel:267-665-2899" 
+                className="font-mono text-lg text-white hover:text-accent transition-colors"
+              >
+                (267) 665-2899
+              </a>
+            </div>
           </div>
 
           {/* Contact Form */}
