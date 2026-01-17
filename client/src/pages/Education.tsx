@@ -16,7 +16,8 @@ const WIDGET_SETTINGS = {
 
 export default function Education() {
   const signupWidgetRef = useRef<HTMLDivElement>(null);
-  const loginWidgetRef = useRef<HTMLDivElement>(null);
+  const loginWidgetDesktopRef = useRef<HTMLDivElement>(null);
+  const loginWidgetMobileRef = useRef<HTMLDivElement>(null);
 
   // Force light mode on mount, revert on unmount
   useEffect(() => {
@@ -39,16 +40,37 @@ export default function Education() {
     };
   }, []);
 
-  // Load My Music Staff Login widget
+  // Load My Music Staff Login widget for Desktop
   useEffect(() => {
-    if (!loginWidgetRef.current) return;
-    loginWidgetRef.current.innerHTML = "";
+    if (!loginWidgetDesktopRef.current) return;
+    // Check if we're on desktop (lg breakpoint = 1024px)
+    const isDesktop = window.innerWidth >= 1024;
+    if (!isDesktop) return;
+    
+    loginWidgetDesktopRef.current.innerHTML = "";
     const script = document.createElement("script");
     script.src = `https://app.mymusicstaff.com/Widget/v4/Widget.ashx?settings=${WIDGET_SETTINGS.login}`;
     script.async = true;
-    loginWidgetRef.current.appendChild(script);
+    loginWidgetDesktopRef.current.appendChild(script);
     return () => {
-      if (loginWidgetRef.current) loginWidgetRef.current.innerHTML = "";
+      if (loginWidgetDesktopRef.current) loginWidgetDesktopRef.current.innerHTML = "";
+    };
+  }, []);
+
+  // Load My Music Staff Login widget for Mobile
+  useEffect(() => {
+    if (!loginWidgetMobileRef.current) return;
+    // Check if we're on mobile (below lg breakpoint = 1024px)
+    const isMobile = window.innerWidth < 1024;
+    if (!isMobile) return;
+    
+    loginWidgetMobileRef.current.innerHTML = "";
+    const script = document.createElement("script");
+    script.src = `https://app.mymusicstaff.com/Widget/v4/Widget.ashx?settings=${WIDGET_SETTINGS.login}`;
+    script.async = true;
+    loginWidgetMobileRef.current.appendChild(script);
+    return () => {
+      if (loginWidgetMobileRef.current) loginWidgetMobileRef.current.innerHTML = "";
     };
   }, []);
 
@@ -300,7 +322,7 @@ export default function Education() {
                     <h3 className="font-serif text-xl text-white">Portal Login</h3>
                     <p className="font-sans text-sm text-white/70 mt-1">Access your student portal</p>
                   </div>
-                  <div ref={loginWidgetRef} className="p-6 min-h-[400px]" />
+                  <div ref={loginWidgetMobileRef} className="p-6 min-h-[400px]" />
                 </div>
               </motion.section>
             </div>
@@ -339,7 +361,7 @@ export default function Education() {
                       <h3 className="font-serif text-xl text-white">Portal Login</h3>
                       <p className="font-sans text-sm text-white/70 mt-1">Access your student portal</p>
                     </div>
-                    <div ref={loginWidgetRef} className="p-6 min-h-[400px]" />
+                    <div ref={loginWidgetDesktopRef} className="p-6 min-h-[400px]" />
                   </div>
                 </motion.div>
               </div>
