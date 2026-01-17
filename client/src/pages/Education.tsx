@@ -6,7 +6,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Music, BookOpen, Users } from "lucide-react";
+import { ArrowRight, Music, BookOpen, Users, Phone } from "lucide-react";
 
 // Widget settings for My Music Staff
 const WIDGET_SETTINGS = {
@@ -263,13 +263,23 @@ export default function Education() {
                   <p className="font-sans text-white/80 mb-6 max-w-lg mx-auto">
                     Learn more about lesson format, scheduling, expectations, and enrollment at Master Key Music School.
                   </p>
-                  <Link
-                    href="/faq"
-                    className="inline-flex items-center gap-2 bg-[#C46A3A] hover:bg-[#B85E2F] text-white font-sans font-medium px-6 py-3 rounded-md transition-colors"
-                  >
-                    View Frequently Asked Questions
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                    <Link
+                      href="/faq"
+                      className="inline-flex items-center gap-2 bg-[#C46A3A] hover:bg-[#B85E2F] text-white font-sans font-medium px-6 py-3 rounded-md transition-colors"
+                    >
+                      View Frequently Asked Questions
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    <span className="text-white/50 hidden sm:inline">or</span>
+                    <a
+                      href="tel:267-665-2899"
+                      className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-sans font-medium px-6 py-3 rounded-md transition-colors border border-white/20"
+                    >
+                      <Phone className="w-4 h-4" />
+                      Call (267) 665-2899
+                    </a>
+                  </div>
                 </div>
               </motion.section>
 
