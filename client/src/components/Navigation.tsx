@@ -26,7 +26,6 @@ export default function Navigation() {
     { name: "Releases", path: "/releases" },
     { name: "Projects", path: "/projects" },
     { name: "Music Education", path: "/education" },
-    { name: "FAQ", path: "/faq" },
     { name: "Contact", path: "/contact" },
   ];
 
