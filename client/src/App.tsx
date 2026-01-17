@@ -9,6 +9,7 @@ import Bio from "./pages/Bio";
 import Releases from "./pages/Releases";
 import Projects from "./pages/Projects";
 import Education from "./pages/Education";
+import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import LookUpRadio from "./pages/LookUpRadio";
 import ClearProject from "./pages/ClearProject";
@@ -24,6 +25,7 @@ function Router() {
       <Route path={"/releases"} component={Releases} />
       <Route path={"/projects"} component={Projects} />
       <Route path={"/education"} component={Education} />
+      <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/projects/look-up-radio"} component={LookUpRadio} />
       <Route path={"/projects/clear"} component={ClearProject} />
