@@ -9,3 +9,4 @@
 - [x] Update Listen Now button to use dark semi-transparent charcoal fill
 - [x] Add phone number 267-665-2899 to Contact page
 - [x] Remove FAQ from navigation menu
+- [x] Hide footer on Music Education page only
