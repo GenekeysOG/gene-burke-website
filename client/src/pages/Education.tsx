@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Music, BookOpen, Users, Phone } from "lucide-react";
+import { assetUrl } from "@/lib/utils";
 
 // Widget settings for My Music Staff
 const WIDGET_SETTINGS = {
@@ -81,7 +82,7 @@ export default function Education() {
         <div className="container mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <Link href="/education" className="flex items-center gap-3">
             <img 
-              src="/images/mkms-logo-icon.png" 
+              src={assetUrl("/images/mkms-logo-icon.png")} 
               alt="MKMS Logo" 
               className="h-10 w-10"
             />
@@ -133,7 +134,7 @@ export default function Education() {
                 className="rounded-lg overflow-hidden shadow-lg"
               >
                 <img
-                  src="/images/mkms-main-image.jpg"
+                  src={assetUrl("/images/mkms-main-image.jpg")}
                   alt="Music education at Master Key Music School"
                   className="w-full h-auto object-cover"
                 />
@@ -179,7 +180,7 @@ export default function Education() {
                   </div>
                   <div className="rounded-lg overflow-hidden shadow-md">
                     <img
-                      src="/images/piano-lessons.png"
+                      src={assetUrl("/images/piano-lessons.png")}
                       alt="Student taking virtual piano lesson"
                       className="w-full h-auto object-cover"
                     />
@@ -376,7 +377,7 @@ export default function Education() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img 
-                src="/images/mkms-logo-icon.png" 
+                src={assetUrl("/images/mkms-logo-icon.png")} 
                 alt="MKMS Logo" 
                 className="h-8 w-8 brightness-0 invert"
               />

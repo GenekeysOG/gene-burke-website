@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { assetUrl } from "@/lib/utils";
 
 export default function Bio() {
   return (
@@ -15,7 +16,7 @@ export default function Bio() {
           >
             <div className="relative aspect-[3/4] w-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
               <img 
-                src="/images/gene-headshot.jpg" 
+                src={assetUrl("/images/gene-headshot.jpg")} 
                 alt="Gene Burke Portrait" 
                 className="h-full w-full object-cover"
               />
