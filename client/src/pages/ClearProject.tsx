@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { assetUrl } from "@/lib/utils";
 
 export default function ClearProject() {
   const songs = [
@@ -74,7 +75,7 @@ export default function ClearProject() {
       <section className="container pb-16">
         <div className="relative aspect-[16/9] max-w-4xl overflow-hidden rounded-lg">
           <img 
-            src="/images/clear-team-stage.jpeg" 
+            src={assetUrl("/images/clear-team-stage.jpeg")} 
             alt="CLEAR Project team on stage"
             className="w-full h-full object-cover"
           />
@@ -104,14 +105,14 @@ export default function ClearProject() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
           <div className="aspect-[4/3] overflow-hidden rounded-lg">
             <img 
-              src="/images/clear-listening-session.jpeg" 
+              src={assetUrl("/images/clear-listening-session.jpeg")} 
               alt="CLEAR listening session"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="aspect-[4/3] overflow-hidden rounded-lg">
             <img 
-              src="/images/clear-piano-talk.jpeg" 
+              src={assetUrl("/images/clear-piano-talk.jpeg")} 
               alt="Gene at piano during CLEAR session"
               className="w-full h-full object-cover"
             />
@@ -155,7 +156,7 @@ export default function ClearProject() {
       <section className="container pb-16">
         <div className="relative aspect-[16/9] max-w-4xl overflow-hidden rounded-lg">
           <img 
-            src="/images/clear-group-photo.jpeg" 
+            src={assetUrl("/images/clear-group-photo.jpeg")} 
             alt="CLEAR Project group photo"
             className="w-full h-full object-cover"
           />

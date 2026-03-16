@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { assetUrl } from "@/lib/utils";
 import {
   Accordion,
   AccordionContent,
@@ -136,7 +137,7 @@ export default function FAQ() {
         <div className="container mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           <Link href="/education" className="flex items-center gap-3">
             <img 
-              src="/images/mkms-logo-icon.png" 
+              src={assetUrl("/images/mkms-logo-icon.png")} 
               alt="MKMS Logo" 
               className="h-10 w-10"
             />
@@ -246,7 +247,7 @@ export default function FAQ() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img 
-                src="/images/mkms-logo-icon.png" 
+                src={assetUrl("/images/mkms-logo-icon.png")} 
                 alt="MKMS Logo" 
                 className="h-8 w-8 brightness-0 invert"
               />

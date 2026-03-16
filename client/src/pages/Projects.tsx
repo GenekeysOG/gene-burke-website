@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { assetUrl } from "@/lib/utils";
 
 export default function Projects() {
   return (
@@ -27,7 +28,7 @@ export default function Projects() {
                 <div className="mb-6">
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden bg-white/5 p-2 flex items-center justify-center">
                     <img 
-                      src="/images/clear-project-logo.png" 
+                      src={assetUrl("/images/clear-project-logo.png")} 
                       alt="CLEAR Project Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -73,7 +74,7 @@ export default function Projects() {
                 <div className="mb-6">
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden bg-white/5 p-2 flex items-center justify-center">
                     <img 
-                      src="/images/look-up-radio-logo.png" 
+                      src={assetUrl("/images/look-up-radio-logo.png")} 
                       alt="Look Up Radio Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -109,7 +110,7 @@ export default function Projects() {
                 <div className="mb-6">
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden bg-white/5 p-2 flex items-center justify-center">
                     <img 
-                      src="/images/master-key-logo.png" 
+                      src={assetUrl("/images/master-key-logo.png")} 
                       alt="Master Key Music Group Logo" 
                       className="w-full h-full object-contain"
                     />

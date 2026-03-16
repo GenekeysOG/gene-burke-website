@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Play, X, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { assetUrl } from "@/lib/utils";
 
 
 interface Release {
@@ -129,7 +130,7 @@ export default function Releases() {
               {/* Cover Art Container */}
               <div className="relative aspect-square w-full overflow-hidden bg-muted/10">
                 <img 
-                  src={release.cover} 
+                  src={assetUrl(release.cover)} 
                   alt={`${release.title} Cover Art`}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
