@@ -5,7 +5,7 @@
 From the repo root:
 
 ```bash
-cd "/Users/fatimaburke/Library/CloudStorage/GoogleDrive-fatimaburke@gmail.com/My Drive/_Business/_Design:Dev/_FatimaBurke.com/Clients/Gene/gene-burke-website"
+cd "gene-burke-website"
 
 pnpm install
 pnpm run dev
