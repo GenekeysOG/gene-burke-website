@@ -9,37 +9,20 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowRight, CheckCircle, Mail, Loader2, Phone } from "lucide-react";
+import { CheckCircle, Mail, Loader2, Phone } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { trpc } from "@/lib/trpc";
 
 // JotForm API configuration
 const JOTFORM_API_KEY = "8c8cea31119f56bfdeeecfe085d02e8e";
 const CONTACT_FORM_ID = "260004248937052";
 
 export default function Contact() {
-  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [message, setMessage] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Newsletter subscription mutation
-  const newsletterMutation = trpc.newsletter.subscribe.useMutation({
-    onSuccess: (data) => {
-      if (data.success) {
-        toast.success(data.message);
-        setEmail("");
-      } else {
-        toast.error(data.message);
-      }
-    },
-    onError: (error) => {
-      toast.error(error.message || "Failed to subscribe. Please try again.");
-    },
-  });
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,17 +66,6 @@ export default function Contact() {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!email.trim()) {
-      toast.error("Please enter your email address");
-      return;
-    }
-
-    newsletterMutation.mutate({ email: email.trim() });
   };
 
   return (
@@ -188,7 +160,7 @@ export default function Contact() {
             </form>
           </div>
 
-          {/* Newsletter Signup - Mailchimp Integration via Backend */}
+          {/* Newsletter Signup - Mailchimp Embed */}
           <div className="pt-16 border-t border-white/10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
               <div className="space-y-4">
@@ -197,34 +169,50 @@ export default function Contact() {
                   Occasional updates on music, projects, and teaching. No spam, ever.
                 </p>
               </div>
-              
-              {/* Newsletter Form with tRPC */}
-              <form 
-                onSubmit={handleNewsletterSubmit}
-                className="flex gap-0"
-              >
-                <Input 
-                  type="email" 
-                  placeholder="Email address" 
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={newsletterMutation.isPending}
-                  className="bg-transparent border-white/10 border-r-0 focus:border-accent h-12 rounded-none flex-grow"
-                />
-                <Button 
-                  type="submit"
-                  disabled={newsletterMutation.isPending}
-                  className="h-12 rounded-none bg-white/10 text-white hover:bg-accent border border-white/10 border-l-0"
+
+              <div id="mc_embed_signup">
+                <form
+                  action="https://geneburke.us5.list-manage.com/subscribe/post?u=681b757d49392c31f551e0304&amp;id=16cc329b54&amp;f_id=00912aebf0"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  className="validate"
+                  target="_self"
+                  noValidate
                 >
-                  {newsletterMutation.isPending ? (
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                  ) : (
-                    <ArrowRight className="h-5 w-5" />
-                  )}
-                  <span className="sr-only">Subscribe</span>
-                </Button>
-              </form>
+                  {/* Honeypot – do not remove */}
+                  <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
+                    <input type="text" name="b_681b757d49392c31f551e0304_16cc329b54" tabIndex={-1} defaultValue="" />
+                  </div>
+
+                  {/* Response messages */}
+                  <div id="mce-responses">
+                    <div id="mce-error-response" style={{ display: "none" }} />
+                    <div id="mce-success-response" style={{ display: "none" }} />
+                  </div>
+
+                  {/* Inline input + submit */}
+                  <div className="flex gap-0">
+                    <input
+                      type="email"
+                      name="EMAIL"
+                      id="mce-EMAIL"
+                      required
+                      defaultValue=""
+                      placeholder="Email address"
+                      className="required email bg-transparent border border-white/10 border-r-0 focus:border-accent focus:outline-none h-12 rounded-none flex-grow px-4 text-foreground placeholder:text-muted-foreground"
+                    />
+                    <button
+                      type="submit"
+                      name="subscribe"
+                      id="mc-embedded-subscribe"
+                      className="h-12 w-12 rounded-none bg-white/10 text-white hover:bg-accent border border-white/10 border-l-0 flex items-center justify-center transition-colors"
+                    >
+                      →
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
 
