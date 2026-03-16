@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Router, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -16,7 +16,10 @@ import ClearProject from "./pages/ClearProject";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-function Router() {
+// Base path for client-side routing (e.g. /gene-burke-website for GitHub Pages).
+const basePath = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "") || undefined;
+
+function AppRouter() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
@@ -46,7 +49,9 @@ function App() {
           <Toaster />
           <ScrollToTop />
           <Navigation />
-          <Router />
+          <Router base={basePath}>
+            <AppRouter />
+          </Router>
           <Footer />
           <div className="grain-overlay" />
         </TooltipProvider>
