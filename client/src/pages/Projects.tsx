@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { assetUrl } from "@/lib/utils";
+import { pathFor } from "@/lib/basePath";
 
 export default function Projects() {
   return (
@@ -44,7 +45,7 @@ export default function Projects() {
                 </p>
                 
                 <div className="flex flex-wrap gap-6">
-                  <Link href="/projects/clear">
+                  <Link href={pathFor("/projects/clear")}>
                     <span className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-white hover:text-accent transition-colors cursor-pointer">
                       Read the Full Story <ArrowRight className="h-4 w-4" />
                     </span>
@@ -89,7 +90,7 @@ export default function Projects() {
                   A Stellar Award–nominated internet radio station serving as a platform for thoughtful curation, emerging voices, and music that uplifts without spectacle. Look Up Radio was a digital sanctuary for Christian listeners across denominational, racial, and cultural lines.
                 </p>
                 
-                <Link href="/projects/look-up-radio">
+                <Link href={pathFor("/projects/look-up-radio")}>
                   <span className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-white hover:text-accent transition-colors cursor-pointer">
                     Read the Full Story <ArrowRight className="h-4 w-4" />
                   </span>
@@ -125,7 +126,7 @@ export default function Projects() {
                   Supporting the creative work of songwriters through production, recording, and administrative guidance. Helping artists bring their music into the world with integrity and excellence.
                 </p>
                 
-                <Link href="/contact">
+                <Link href={pathFor("/contact")}>
                   <span className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-white hover:text-accent transition-colors cursor-pointer">
                     Inquire About Services <ArrowRight className="h-4 w-4" />
                   </span>

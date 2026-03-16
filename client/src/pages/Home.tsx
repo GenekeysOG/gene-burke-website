@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { assetUrl } from "@/lib/utils";
+import { pathFor } from "@/lib/basePath";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -21,12 +22,12 @@ export default function Home() {
 
   const handleLessonsClick = () => {
     setIsBookModalOpen(false);
-    setLocation("/education");
+    setLocation(pathFor("/education"));
   };
 
   const handleCollaborationClick = () => {
     setIsBookModalOpen(false);
-    setLocation("/contact");
+    setLocation(pathFor("/contact"));
   };
 
   return (
@@ -78,7 +79,7 @@ export default function Home() {
             >
               Book
             </Button>
-            <Link href="/releases">
+            <Link href={pathFor("/releases")}>
               <Button 
                 size="lg" 
                 className="h-auto rounded-none border border-white/30 bg-[#1a1a1a]/70 px-8 py-4 font-mono text-sm uppercase tracking-widest text-white backdrop-blur-sm transition-all hover:bg-white hover:text-black hover:border-white"
