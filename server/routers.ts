@@ -2,8 +2,6 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
-import { subscribeToNewsletter } from "./mailchimp";
-import { z } from "zod";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -17,16 +15,6 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
-  }),
-
-  // Newsletter subscription
-  newsletter: router({
-    subscribe: publicProcedure
-      .input(z.object({ email: z.string().email() }))
-      .mutation(async ({ input }) => {
-        const result = await subscribeToNewsletter(input.email);
-        return result;
-      }),
   }),
 });
 
