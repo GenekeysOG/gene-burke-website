@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Instagram } from "lucide-react";
 import { Link } from "wouter";
 import { assetUrl } from "@/lib/utils";
+import { pathFor } from "@/lib/basePath";
 
 export default function LookUpRadio() {
   return (
@@ -9,7 +10,7 @@ export default function LookUpRadio() {
       {/* Back Link */}
       <div className="container pt-24 pb-4">
         <Link 
-          href="/projects"
+          href={pathFor("/projects")}
           className="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-accent transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />

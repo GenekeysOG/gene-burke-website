@@ -16,8 +16,7 @@ import ClearProject from "./pages/ClearProject";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-// Base path for client-side routing (e.g. /gene-burke-website for GitHub Pages).
-const basePath = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "") || undefined;
+import { basePath } from "@/lib/basePath";
 
 function AppRouter() {
   // make sure to consider if you need authentication for certain routes

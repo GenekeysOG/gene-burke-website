@@ -8,6 +8,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Music, BookOpen, Users, Phone } from "lucide-react";
 import { assetUrl } from "@/lib/utils";
+import { pathFor } from "@/lib/basePath";
 
 // Widget settings for My Music Staff
 const WIDGET_SETTINGS = {
@@ -80,7 +81,7 @@ export default function Education() {
       {/* Custom Header for Education Pages */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#003a63]/10">
         <div className="container mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <Link href="/education" className="flex items-center gap-3">
+          <Link href={pathFor("/education")} className="flex items-center gap-3">
             <img 
               src={assetUrl("/images/mkms-logo-icon.png")} 
               alt="MKMS Logo" 
@@ -92,13 +93,13 @@ export default function Education() {
           </Link>
           <nav className="flex items-center gap-6">
             <Link 
-              href="/education" 
+              href={pathFor("/education")} 
               className="font-sans text-sm font-medium text-[#C46A3A] hover:text-[#B85E2F] transition-colors"
             >
               Music Education
             </Link>
             <Link 
-              href="/faq" 
+              href={pathFor("/faq")} 
               className="font-sans text-sm font-medium text-[#1F1F1F]/70 hover:text-[#003a63] transition-colors"
             >
               FAQ
@@ -288,7 +289,7 @@ export default function Education() {
                   </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                     <Link
-                      href="/faq"
+                      href={pathFor("/faq")}
                       className="inline-flex items-center gap-2 bg-[#C46A3A] hover:bg-[#B85E2F] text-white font-sans font-medium px-6 py-3 rounded-md transition-colors"
                     >
                       View Frequently Asked Questions
@@ -386,13 +387,13 @@ export default function Education() {
               </span>
             </div>
             <div className="flex items-center gap-6 text-sm">
-              <Link href="/education" className="text-white/70 hover:text-white transition-colors">
+              <Link href={pathFor("/education")} className="text-white/70 hover:text-white transition-colors">
                 Music Education
               </Link>
-              <Link href="/faq" className="text-white/70 hover:text-white transition-colors">
+              <Link href={pathFor("/faq")} className="text-white/70 hover:text-white transition-colors">
                 FAQ
               </Link>
-              <Link href="/" className="text-white/70 hover:text-white transition-colors">
+              <Link href={pathFor("/")} className="text-white/70 hover:text-white transition-colors">
                 Gene Burke
               </Link>
             </div>

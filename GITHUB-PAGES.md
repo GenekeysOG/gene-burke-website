@@ -41,6 +41,20 @@ VITE_BASE_PATH=/gene-burke-website/ pnpm run build:gh-pages
 
 Then serve `dist/public` with any static server (e.g. `npx serve dist/public`) and open the app at `http://localhost:3000/gene-burke-website/`.
 
-## Custom domain (optional)
+## Custom domain
 
-To use a custom domain (e.g. `geneburke.com`) with GitHub Pages, add a `CNAME` file in `dist/public` with the domain name and configure DNS as per [GitHub’s custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site). You would then build with `VITE_BASE_PATH=/` and adjust the workflow to use that base when deploying for the custom domain.
+When you point a custom domain (e.g. `geneburke.com`) at this GitHub Pages site, GitHub serves the site at the **root** of that domain. So you want the app to use base path `/` instead of `/gene-burke-website/`.
+
+1. **Build with root base**  
+   In your deploy workflow (or when building locally for the custom domain), set:
+   ```yaml
+   env:
+     VITE_BASE_PATH: /
+   ```
+   and run `pnpm run build:gh-pages`. The app already uses `pathFor()` and `basePath` everywhere, so with `VITE_BASE_PATH=/` all links and routes work at the domain root (e.g. `https://geneburke.com/bio`).
+
+2. **Optional: separate workflow for custom domain**  
+   You can have a second workflow or a manual deploy that sets `VITE_BASE_PATH=/` and uploads the same `dist/public` artifact. Or change the existing workflow to use `VITE_BASE_PATH: /` once the custom domain is active and you no longer need the `*.github.io/repo-name/` URL.
+
+3. **DNS and CNAME**  
+   Add a `CNAME` file in `client/public/` containing your domain (e.g. `geneburke.com`) so it’s included in the build. Configure DNS as in [GitHub’s custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { pathFor } from "@/lib/basePath";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
@@ -41,7 +42,7 @@ export default function Navigation() {
       <div className="container flex items-center justify-between">
         {/* Identity Line - Only visible on non-home pages */}
         <Link 
-          href="/"
+          href={pathFor("/")}
           className={cn(
             "text-lg font-serif tracking-tight hover:opacity-70 transition-opacity",
             isHomePage ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -68,7 +69,7 @@ export default function Navigation() {
                 {navItems.map((item) => (
                   <li key={item.path}>
                     <Link 
-                      href={item.path}
+                      href={pathFor(item.path)}
                       className={cn(
                         "block text-4xl md:text-5xl font-serif font-light tracking-tight transition-colors hover:text-accent",
                         location === item.path ? "text-accent italic" : "text-foreground"

@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { assetUrl } from "@/lib/utils";
+import { pathFor } from "@/lib/basePath";
 
 export default function ClearProject() {
   const songs = [
@@ -53,7 +54,7 @@ export default function ClearProject() {
       {/* Back Link */}
       <div className="container pt-24 pb-4">
         <Link 
-          href="/projects"
+          href={pathFor("/projects")}
           className="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-accent transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -126,7 +127,7 @@ export default function ClearProject() {
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl md:text-3xl font-serif font-light">Songs Written for CLEAR</h2>
             <Link 
-              href="/releases"
+              href={pathFor("/releases")}
               className="text-sm font-mono text-accent hover:underline inline-flex items-center gap-1"
             >
               View All Releases <ExternalLink className="w-3 h-3" />
