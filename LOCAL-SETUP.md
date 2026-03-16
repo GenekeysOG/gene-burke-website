@@ -51,4 +51,7 @@ JWT_SECRET=any-random-string-for-local
 |----------------|----------------------------------------------------|
 | `pnpm run dev` | Start dev server (Vite + Express) at http://localhost:3000 |
 | `pnpm run build` | Build for production → `dist/public/` + `dist/index.js` |
+| `pnpm run build:gh-pages` | Build static frontend only (for GitHub Pages) |
 | `pnpm run start` | Run production build (Node server + static files)  |
+
+See **GITHUB-PAGES.md** for deploying to GitHub Pages.

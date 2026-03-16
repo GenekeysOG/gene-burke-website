@@ -9,7 +9,12 @@ import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
 
+// GitHub Pages serves from https://<user>.github.io/<repo>/ so we need a base path.
+// Set VITE_BASE_PATH=/repo-name/ when building for GitHub Pages (e.g. in CI).
+const base = process.env.VITE_BASE_PATH ?? "/";
+
 export default defineConfig({
+  base,
   plugins,
   resolve: {
     alias: {
