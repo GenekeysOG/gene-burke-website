@@ -39,8 +39,8 @@ jobs:
 
       - name: Build for GitHub Pages
         env:
-          # Project pages are served at https://<user>.github.io/<repo>/
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          # Custom domain: site is served at https://geneburke.com/ so base path is /
+          VITE_BASE_PATH: /
         run: pnpm run build:gh-pages
 
       - name: SPA fallback for client-side routing
