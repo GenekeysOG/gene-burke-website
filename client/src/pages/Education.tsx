@@ -247,6 +247,27 @@ export default function Education() {
                 </p>
               </motion.section>
 
+              {/* Course Outlines */}
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-[#C46A3A] mb-4">Course Outlines</h2>
+                <Link
+                  href={pathFor("/education/music-theory-for-producers")}
+                  className="flex items-center justify-between bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-[#003a63]/10 hover:border-[#C46A3A]/40 hover:shadow-md transition-all group"
+                >
+                  <div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#C46A3A] mb-1">24 Units · 4 Phases · ~24 Weeks</div>
+                    <div className="font-serif text-xl text-[#003a63] mb-1">Music Theory for Emerging Producers</div>
+                    <div className="font-sans text-sm text-[#1F1F1F]/60">Keyboard literacy, harmony, ear training, and DAW-based production mentorship.</div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-[#C46A3A] flex-shrink-0 ml-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.section>
+
               {/* Philosophy */}
               <motion.section
                 initial={{ opacity: 0, y: 20 }}
