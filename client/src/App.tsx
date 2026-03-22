@@ -10,6 +10,7 @@ import Releases from "./pages/Releases";
 import Projects from "./pages/Projects";
 import Education from "./pages/Education";
 import MusicTheoryProducers from "./pages/MusicTheoryProducers";
+import TheoryForTheSanctuary from "./pages/TheoryForTheSanctuary";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import LookUpRadio from "./pages/LookUpRadio";
@@ -29,6 +30,7 @@ function AppRouter() {
       <Route path={"/projects"} component={Projects} />
       <Route path={"/education"} component={Education} />
       <Route path={"/education/music-theory-for-producers"} component={MusicTheoryProducers} />
+      <Route path={"/education/theory-for-the-sanctuary"} component={TheoryForTheSanctuary} />
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/projects/look-up-radio"} component={LookUpRadio} />

@@ -266,6 +266,17 @@ export default function Education() {
                   </div>
                   <ArrowRight className="w-5 h-5 text-[#C46A3A] flex-shrink-0 ml-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
+                <Link
+                  href={pathFor("/education/theory-for-the-sanctuary")}
+                  className="flex items-center justify-between bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-[#003a63]/10 hover:border-[#C46A3A]/40 hover:shadow-md transition-all group mt-2"
+                >
+                  <div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#C46A3A] mb-1">4 Modules · 12 Units · 12 Weeks · Online Cohort</div>
+                    <div className="font-serif text-xl text-[#003a63] mb-1">Theory for the Sanctuary</div>
+                    <div className="font-sans text-sm text-[#1F1F1F]/60">Music theory for adults in church music ministry — rhythm, pitch, harmony, and gospel tradition.</div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-[#C46A3A] flex-shrink-0 ml-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </motion.section>
 
               {/* Philosophy */}
