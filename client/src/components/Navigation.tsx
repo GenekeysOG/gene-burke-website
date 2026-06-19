@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
-  const isEducationPage = location === "/education" || location === "/faq";
+  const isEducationPage = location === "/education" || location === "/faq" || location === "/recital";
   const isHomePage = location === "/";
   // Look Up Radio page now shows the home link with dark background
   
