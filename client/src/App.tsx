@@ -13,6 +13,7 @@ import MusicTheoryProducers from "./pages/MusicTheoryProducers";
 import TheoryForTheSanctuary from "./pages/TheoryForTheSanctuary";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import Recital from "./pages/Recital";
 import LookUpRadio from "./pages/LookUpRadio";
 import ClearProject from "./pages/ClearProject";
 import Navigation from "./components/Navigation";
@@ -33,6 +34,7 @@ function AppRouter() {
       <Route path={"/education/theory-for-the-sanctuary"} component={TheoryForTheSanctuary} />
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />
+      <Route path={"/recital"} component={Recital} />
       <Route path={"/projects/look-up-radio"} component={LookUpRadio} />
       <Route path={"/projects/clear"} component={ClearProject} />
       
