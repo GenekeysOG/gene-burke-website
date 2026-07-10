@@ -3,13 +3,7 @@ import { cn } from "@/lib/utils";
 
 export default function Footer() {
   const [location] = useLocation();
-  const isEducationPage = location === "/education" || location === "/faq";
   const isHomePage = location === "/";
-
-  // Hide footer on Music Education page and FAQ page
-  if (isEducationPage) {
-    return null;
-  }
 
   return (
     <footer className={cn(

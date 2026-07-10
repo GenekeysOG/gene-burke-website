@@ -9,10 +9,9 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
-  const isEducationPage = location === "/education" || location === "/faq" || location === "/recital";
   const isHomePage = location === "/";
   // Look Up Radio page now shows the home link with dark background
-  
+
   // Pages where the home link is hidden (no background needed)
   const hideHomeLinkPages = isHomePage;
 
@@ -26,39 +25,36 @@ export default function Navigation() {
     { name: "Bio", path: "/bio" },
     { name: "Releases", path: "/releases" },
     { name: "Projects", path: "/projects" },
-    { name: "Music Education", path: "/education" },
     { name: "Contact", path: "/contact" },
   ];
 
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300",
-      isEducationPage 
-        ? "text-foreground bg-white/90 backdrop-blur-sm" 
-        : hideHomeLinkPages 
-          ? "text-white mix-blend-difference" 
-          : "text-white bg-background/90 backdrop-blur-sm"
+      hideHomeLinkPages
+        ? "text-white mix-blend-difference"
+        : "text-white bg-background/90 backdrop-blur-sm"
     )}>
       <div className="container flex items-center justify-between">
         {/* Identity Line - Only visible on non-home pages */}
-        <Link 
+        <Link
           href={pathFor("/")}
           className={cn(
             "text-lg font-serif tracking-tight hover:opacity-70 transition-opacity",
             isHomePage ? "opacity-0 pointer-events-none" : "opacity-100"
           )}
         >
-          <span className={isEducationPage ? "text-[#1a1a1a]" : ""}>Gene</span> <span className="italic text-accent">Burke</span>
+          Gene <span className="italic text-accent">Burke</span>
         </Link>
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               className="hover:bg-transparent focus:ring-0"
             >
-              <Menu className={cn("h-8 w-8 stroke-[1.5]", isEducationPage && "text-[#1a1a1a]")} />
+              <Menu className="h-8 w-8 stroke-[1.5]" />
               <span className="sr-only">Open menu</span>
             </Button>
           </SheetTrigger>
