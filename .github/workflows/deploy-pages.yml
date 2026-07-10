@@ -41,6 +41,7 @@ jobs:
         env:
           # Custom domain: site is served at https://geneburke.com/ so base path is /
           VITE_BASE_PATH: /
+          VITE_JOTFORM_API_KEY: ${{ secrets.VITE_JOTFORM_API_KEY }}
         run: pnpm run build:gh-pages
 
       - name: SPA fallback for client-side routing
