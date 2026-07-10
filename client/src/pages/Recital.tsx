@@ -61,40 +61,33 @@ export default function Recital() {
   }, []);
 
   function field(key: keyof FormState) {
-    return (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
-    ) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
+    return (e: { target: { value: string } }) =>
+      setForm((prev) => ({ ...prev, [key]: e.target.value }));
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: { preventDefault(): void }) {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
 
-    const body = new URLSearchParams();
-    body.append("submission[q2_fullname0][first]", form.studentFirstName);
-    body.append("submission[q2_fullname0][last]", form.studentLastName);
-    body.append("submission[q3_number1]", form.studentAge);
-    body.append("submission[q4_dropdown2]", form.instrument);
-    body.append("submission[teacher]", form.teacher);
-    body.append("submission[howWill]", form.participation);
-    body.append("submission[tshirtSize]", form.tshirtSize);
-    body.append("submission[q5_fullname3][first]", form.parentFirstName);
-    body.append("submission[q5_fullname3][last]", form.parentLastName);
-    body.append("submission[q6_email4]", form.email);
-    if (form.phone) body.append("submission[q7_phone5][full]", form.phone);
-    if (form.comments) body.append("submission[q8_textarea6]", form.comments);
+    const fd = new FormData();
+    fd.append("submission[2][first]", form.studentFirstName);
+    fd.append("submission[2][last]", form.studentLastName);
+    fd.append("submission[3]", form.studentAge);
+    fd.append("submission[4]", form.instrument);
+    fd.append("submission[10]", form.teacher);
+    fd.append("submission[13]", form.participation);
+    fd.append("submission[12]", form.tshirtSize);
+    fd.append("submission[5][first]", form.parentFirstName);
+    fd.append("submission[5][last]", form.parentLastName);
+    fd.append("submission[6]", form.email);
+    if (form.phone) fd.append("submission[7][full]", form.phone);
+    if (form.comments) fd.append("submission[8]", form.comments);
 
     try {
       const res = await fetch(
         `https://api.jotform.com/form/${FORM_ID}/submissions?apiKey=${API_KEY}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: body.toString(),
-        }
+        { method: "POST", body: fd }
       );
       const data = await res.json();
       if (data.responseCode === 200) {
@@ -179,7 +172,7 @@ export default function Recital() {
                 </p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8" noValidate>
+              <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Student Information */}
                 <div className="bg-white rounded-lg border border-[#003a63]/10 shadow-sm overflow-hidden">
                   <div className="bg-[#003a63] px-6 py-4">
