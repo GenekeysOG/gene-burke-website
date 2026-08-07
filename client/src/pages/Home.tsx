@@ -22,7 +22,7 @@ export default function Home() {
 
   const handleLessonsClick = () => {
     setIsBookModalOpen(false);
-    setLocation(pathFor("/education"));
+    window.location.href = "https://masterkeystudio.com";
   };
 
   const handleCollaborationClick = () => {
