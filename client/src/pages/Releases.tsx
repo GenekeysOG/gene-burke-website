@@ -16,9 +16,41 @@ interface Release {
   embedType: "bandcamp" | "spotify";
   bandcampTrackId?: string;
   spotifyAlbumId?: string;
+  presave?: boolean;
+  releaseDate?: string;
 }
 
 const releases: Release[] = [
+  {
+    title: "Believe In Me",
+    year: "2026",
+    cover: "/images/believe-in-me-cover.jpg",
+    link: "https://ffm.to/3ygglw9",
+    credits: "Written and performed by Gene Burke, featuring Jaekrys",
+    embedType: "spotify",
+    presave: true,
+    releaseDate: "September 7, 2026"
+  },
+  {
+    title: "Just In Case",
+    year: "2023",
+    cover: "/images/just-in-case-cover.jpg",
+    link: "https://open.spotify.com/album/2UUMRBmhdPHes2MbXQuiSI",
+    youtube: "https://youtu.be/Q5jzdFzWQkE?si=5VWNq6HqCvgY516e",
+    credits: "Written, produced, and performed by Gene Burke",
+    embedType: "spotify",
+    spotifyAlbumId: "2UUMRBmhdPHes2MbXQuiSI"
+  },
+  {
+    title: "Be Ye Strong",
+    year: "2020",
+    cover: "/images/be-ye-strong-cover.png",
+    link: "https://open.spotify.com/album/32oflcy6N3dx266Sb9EtC5",
+    youtube: "https://youtu.be/wGL-H5DMsZI?si=urayfW6JZDFMOtSb",
+    credits: "Written and performed by Gene Burke",
+    embedType: "spotify",
+    spotifyAlbumId: "32oflcy6N3dx266Sb9EtC5"
+  },
   {
     title: "Creator G-d (Masterpiece)",
     year: "2025",
@@ -72,26 +104,6 @@ const releases: Release[] = [
     credits: "Written and Produced by Gene Burke. Vocals: Amir Johnson, Jaelyn Neal Holland, Jamila Cole, Charise Johnson",
     embedType: "bandcamp",
     bandcampTrackId: "221970352"
-  },
-  {
-    title: "Just In Case",
-    year: "2023",
-    cover: "/images/just-in-case-cover.jpg",
-    link: "https://open.spotify.com/album/2UUMRBmhdPHes2MbXQuiSI",
-    youtube: "https://youtu.be/Q5jzdFzWQkE?si=5VWNq6HqCvgY516e",
-    credits: "Written, produced, and performed by Gene Burke",
-    embedType: "spotify",
-    spotifyAlbumId: "2UUMRBmhdPHes2MbXQuiSI"
-  },
-  {
-    title: "Be Ye Strong",
-    year: "2020",
-    cover: "/images/be-ye-strong-cover.png",
-    link: "https://open.spotify.com/album/32oflcy6N3dx266Sb9EtC5",
-    youtube: "https://youtu.be/wGL-H5DMsZI?si=urayfW6JZDFMOtSb",
-    credits: "Written and performed by Gene Burke",
-    embedType: "spotify",
-    spotifyAlbumId: "32oflcy6N3dx266Sb9EtC5"
   }
 ];
 
@@ -137,9 +149,9 @@ export default function Releases() {
                 
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
+                  <Button
+                    variant="outline"
+                    size="icon"
                     className="h-14 w-14 rounded-full border-white text-white hover:bg-white hover:text-black transition-colors"
                     onClick={() => setSelectedRelease(release)}
                   >
@@ -153,18 +165,26 @@ export default function Releases() {
                     </a>
                   )}
                 </div>
+
+                {release.presave && (
+                  <div className="absolute top-3 left-3 bg-accent text-black font-mono text-xs uppercase tracking-wider px-3 py-1">
+                    Pre-Save
+                  </div>
+                )}
               </div>
 
               {/* Info */}
               <div className="space-y-2">
                 <div className="flex items-baseline justify-between border-b border-white/10 pb-2">
-                  <h3 
+                  <h3
                     className="font-serif text-2xl text-white group-hover:text-accent transition-colors cursor-pointer"
                     onClick={() => setSelectedRelease(release)}
                   >
                     {release.title}
                   </h3>
-                  <span className="font-mono text-sm text-muted-foreground">{release.year}</span>
+                  <span className="font-mono text-sm text-muted-foreground">
+                    {release.presave ? release.releaseDate : release.year}
+                  </span>
                 </div>
                 <p className="font-sans text-sm text-muted-foreground leading-relaxed">
                   {release.credits}
@@ -199,22 +219,37 @@ export default function Releases() {
               
               {/* Embedded Player */}
               <div className="w-full">
-                {selectedRelease.embedType === "bandcamp" && selectedRelease.bandcampTrackId && (
-                  <iframe
-                    style={{ border: 0, width: "100%", height: "120px" }}
-                    src={getBandcampEmbed(selectedRelease.bandcampTrackId)}
-                    seamless
-                    title={`${selectedRelease.title} - Bandcamp Player`}
-                  />
-                )}
-                {selectedRelease.embedType === "spotify" && selectedRelease.spotifyAlbumId && (
-                  <iframe
-                    style={{ borderRadius: "0", width: "100%", height: "352px" }}
-                    src={getSpotifyEmbed(selectedRelease.spotifyAlbumId)}
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    title={`${selectedRelease.title} - Spotify Player`}
-                  />
+                {selectedRelease.presave ? (
+                  <div className="flex flex-col items-center justify-center gap-3 py-10 px-4 text-center">
+                    <p className="font-mono text-xs uppercase tracking-wider text-accent">
+                      Releasing {selectedRelease.releaseDate}
+                    </p>
+                    <a href={selectedRelease.link} target="_blank" rel="noopener noreferrer">
+                      <Button className="bg-accent text-black hover:bg-accent/90">
+                        Pre-Save on Spotify
+                      </Button>
+                    </a>
+                  </div>
+                ) : (
+                  <>
+                    {selectedRelease.embedType === "bandcamp" && selectedRelease.bandcampTrackId && (
+                      <iframe
+                        style={{ border: 0, width: "100%", height: "120px" }}
+                        src={getBandcampEmbed(selectedRelease.bandcampTrackId)}
+                        seamless
+                        title={`${selectedRelease.title} - Bandcamp Player`}
+                      />
+                    )}
+                    {selectedRelease.embedType === "spotify" && selectedRelease.spotifyAlbumId && (
+                      <iframe
+                        style={{ borderRadius: "0", width: "100%", height: "352px" }}
+                        src={getSpotifyEmbed(selectedRelease.spotifyAlbumId)}
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        title={`${selectedRelease.title} - Spotify Player`}
+                      />
+                    )}
+                  </>
                 )}
               </div>
 
@@ -224,18 +259,20 @@ export default function Releases() {
                   {selectedRelease.credits}
                 </p>
                 <div className="flex gap-3 mt-4">
-                  <a 
-                    href={selectedRelease.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="font-mono text-xs text-accent hover:underline"
-                  >
-                    Open in {selectedRelease.embedType === "bandcamp" ? "Bandcamp" : "Spotify"} →
-                  </a>
+                  {!selectedRelease.presave && (
+                    <a
+                      href={selectedRelease.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-accent hover:underline"
+                    >
+                      Open in {selectedRelease.embedType === "bandcamp" ? "Bandcamp" : "Spotify"} →
+                    </a>
+                  )}
                   {selectedRelease.youtube && (
-                    <a 
-                      href={selectedRelease.youtube} 
-                      target="_blank" 
+                    <a
+                      href={selectedRelease.youtube}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="font-mono text-xs text-accent hover:underline"
                     >
