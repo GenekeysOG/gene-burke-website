@@ -14,6 +14,7 @@ import ClearProject from "./pages/ClearProject";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import { basePath } from "@/lib/basePath";
 
 function AppRouter() {
@@ -45,6 +46,7 @@ function App() {
           <ScrollToTop />
           <Navigation />
           <Router base={basePath}>
+            <AnalyticsTracker />
             <AppRouter />
           </Router>
           <Footer />
