@@ -13,9 +13,11 @@ interface Release {
   link: string;
   credits: string;
   youtube?: string;
+  appleMusic?: string;
   embedType: "bandcamp" | "spotify";
   bandcampTrackId?: string;
   spotifyAlbumId?: string;
+  spotifyTrackId?: string;
   presave?: boolean;
   releaseDate?: string;
 }
@@ -25,11 +27,12 @@ const releases: Release[] = [
     title: "Believe In Me",
     year: "2026",
     cover: "/images/believe-in-me-cover.jpg",
-    link: "https://ffm.to/3ygglw9",
+    link: "https://open.spotify.com/track/7DgzC2Uiqjk5nmOFKJeV63",
+    youtube: "https://www.youtube.com/watch?v=oZulCxtbWDM",
+    appleMusic: "https://music.apple.com/us/song/believe-in-me-feat-jaekrys/6810014318",
     credits: "Written and performed by Gene Burke, featuring Jaekrys",
     embedType: "spotify",
-    presave: true,
-    releaseDate: "September 7, 2026"
+    spotifyTrackId: "7DgzC2Uiqjk5nmOFKJeV63"
   },
   {
     title: "Just In Case",
@@ -37,6 +40,7 @@ const releases: Release[] = [
     cover: "/images/just-in-case-cover.jpg",
     link: "https://open.spotify.com/album/2UUMRBmhdPHes2MbXQuiSI",
     youtube: "https://youtu.be/Q5jzdFzWQkE?si=5VWNq6HqCvgY516e",
+    appleMusic: "https://music.apple.com/us/song/just-in-case/1688637450",
     credits: "Written, produced, and performed by Gene Burke",
     embedType: "spotify",
     spotifyAlbumId: "2UUMRBmhdPHes2MbXQuiSI"
@@ -47,6 +51,7 @@ const releases: Release[] = [
     cover: "/images/be-ye-strong-cover.png",
     link: "https://open.spotify.com/album/32oflcy6N3dx266Sb9EtC5",
     youtube: "https://youtu.be/wGL-H5DMsZI?si=urayfW6JZDFMOtSb",
+    appleMusic: "https://music.apple.com/us/song/be-ye-strong/1505961785",
     credits: "Written and performed by Gene Burke",
     embedType: "spotify",
     spotifyAlbumId: "32oflcy6N3dx266Sb9EtC5"
@@ -114,8 +119,8 @@ export default function Releases() {
     return `https://bandcamp.com/EmbeddedPlayer/track=${trackId}/size=large/bgcol=1a1a1a/linkcol=c06c58/tracklist=false/artwork=small/transparent=true/`;
   };
 
-  const getSpotifyEmbed = (albumId: string) => {
-    return `https://open.spotify.com/embed/album/${albumId}?utm_source=generator&theme=0`;
+  const getSpotifyEmbed = (id: string, type: "album" | "track" = "album") => {
+    return `https://open.spotify.com/embed/${type}/${id}?utm_source=generator&theme=0`;
   };
 
   return (
@@ -197,7 +202,7 @@ export default function Releases() {
 
       {/* Player Modal */}
       <Dialog open={!!selectedRelease} onOpenChange={() => setSelectedRelease(null)}>
-        <DialogContent className="sm:max-w-lg bg-[#1a1a1a] border-white/10 p-0 overflow-hidden">
+        <DialogContent className="sm:max-w-lg bg-[#1a1a1a] border-white/10 p-0 overflow-hidden" showCloseButton={false}>
           <DialogTitle className="sr-only">{selectedRelease?.title || "Music Player"}</DialogTitle>
           {selectedRelease && (
             <div className="flex flex-col">
@@ -240,10 +245,13 @@ export default function Releases() {
                         title={`${selectedRelease.title} - Bandcamp Player`}
                       />
                     )}
-                    {selectedRelease.embedType === "spotify" && selectedRelease.spotifyAlbumId && (
+                    {selectedRelease.embedType === "spotify" && (selectedRelease.spotifyAlbumId || selectedRelease.spotifyTrackId) && (
                       <iframe
-                        style={{ borderRadius: "0", width: "100%", height: "352px" }}
-                        src={getSpotifyEmbed(selectedRelease.spotifyAlbumId)}
+                        style={{ borderRadius: "0", width: "100%", height: selectedRelease.spotifyTrackId ? "152px" : "352px" }}
+                        src={getSpotifyEmbed(
+                          (selectedRelease.spotifyAlbumId ?? selectedRelease.spotifyTrackId)!,
+                          selectedRelease.spotifyTrackId ? "track" : "album"
+                        )}
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                         loading="lazy"
                         title={`${selectedRelease.title} - Spotify Player`}
@@ -258,7 +266,7 @@ export default function Releases() {
                 <p className="font-sans text-sm text-muted-foreground leading-relaxed">
                   {selectedRelease.credits}
                 </p>
-                <div className="flex gap-3 mt-4">
+                <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4">
                   {!selectedRelease.presave && (
                     <a
                       href={selectedRelease.link}
@@ -267,6 +275,16 @@ export default function Releases() {
                       className="font-mono text-xs text-accent hover:underline"
                     >
                       Open in {selectedRelease.embedType === "bandcamp" ? "Bandcamp" : "Spotify"} →
+                    </a>
+                  )}
+                  {selectedRelease.appleMusic && (
+                    <a
+                      href={selectedRelease.appleMusic}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-accent hover:underline"
+                    >
+                      Listen on Apple Music →
                     </a>
                   )}
                   {selectedRelease.youtube && (
